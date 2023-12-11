@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     private Vector2 movementInput;
 
     private float timer = 0f;
+    private bool isMoving = false;
 
 
 
@@ -34,6 +35,7 @@ public class Movement : MonoBehaviour
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
         movementInput = Vector2.zero;
+        isMoving = false;
     }
 
     private void OnDisable()
@@ -45,21 +47,22 @@ public class Movement : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        isMoving = true;
     }
 
     private void Move()
     {
         Vector3 movementVector = new Vector3(movementInput.x, movementInput.y, 0);
         transform.position += movementVector * spd * Time.deltaTime;
-
-        //Invoke(nameof(InstantiateFootprint), 2f);
     }
 
     private void InstantiateFootprint()
     {
         if (footprintsPrefab == null) return;
+        if (!isMoving) return;
 
-        Instantiate(footprintsPrefab, transform.position, Quaternion.identity);
+        float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
+        Instantiate(footprintsPrefab, transform.position, Quaternion.Euler(0f, 0f, angle));
     }
 
     private void Update()
@@ -74,7 +77,7 @@ public class Movement : MonoBehaviour
         }
 
         Move();
-
-
     }
+
+
 }
