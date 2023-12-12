@@ -33,7 +33,7 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
             levelDatas.TryGetValue(i, out LevelData curData);
 
             GameObject obj = Instantiate(_buttonPrefab, Levels.transform);
-            obj.GetComponent<LevelSelectItem>().SetButtons(curData);
+            obj.GetComponent<LevelSelectItem>().PrepareLevelDisplay(curData);
             _levelDisplays.Add(curData, obj);
         }
     }

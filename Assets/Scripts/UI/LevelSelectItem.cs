@@ -12,8 +12,10 @@ public class LevelSelectItem : MonoBehaviour
     [SerializeField]
     private Button _resetBtn;
 
-    public void SetButtons(LevelData curData)
+    public void PrepareLevelDisplay(LevelData curData)
     {
+        if (ImageObj.TryGetComponent(out Image image)) image.sprite = curData.Image;
+
         _startBtn.onClick.RemoveAllListeners();
         _startBtn.onClick.AddListener(() =>
         {
