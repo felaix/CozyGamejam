@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Outline : MonoBehaviour
@@ -10,24 +7,30 @@ public class Outline : MonoBehaviour
     public GameObject testObj;
     public Transform testParent;
 
-    private Texture2D originalTexture;
+    //private Texture2D originalTexture;
     private SpriteRenderer outlineRenderer;
 
     private void Start()
     {
         outlineRenderer = GetComponent<SpriteRenderer>();
-        originalTexture = outlineRenderer.sprite.texture;
+        //originalTexture = outlineRenderer.sprite.texture;
 
         GetSpritePixels();
     }
 
     private void GetSpritePixels()
     {
+        // Get SR
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Get current sprite
         Sprite sprite = spriteRenderer.sprite;
 
+        // Get the vertices of the sprite
         Vector2[] spriteVertices = sprite.vertices;
 
+        // ! Instantiate an object for each vertices
+        // ! reductionFactor to reduce the amount of objects
         for (int i = 0; i < spriteVertices.Length; i += reductionFactor)
         {
             Debug.Log("Sprite vertices: " + spriteVertices.Length);
