@@ -20,18 +20,20 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
         CallbackManager.Instance.OnShowLevelSelection += Show;
     }
 
-    private void Show(Dictionary<int, LevelData> levelDatas)
+    private void Show(List<LevelData> levels)
     {
-        CreateLevelDisplays(levelDatas);
+        CreateLevelDisplays(levels);
         base.ShowWindow();
     }
 
-    private void CreateLevelDisplays(Dictionary<int, LevelData> levelDatas)
+    private void CreateLevelDisplays(List<LevelData> levels)
     {
-        for (int i = 0; i < levelDatas.Count; i++)
+        //  change input to:
+        //  only levelDatas (but from all available tiers, as long as i < curTier/ or nextTier
+        for (int i = 0; i < levels.Count; i++)
         {
-            levelDatas.TryGetValue(i, out LevelData curData);
-
+            LevelData curData = levels[i];
+            
             GameObject obj = Instantiate(_buttonPrefab, Levels.transform);
             obj.GetComponent<LevelSelectItem>().PrepareLevelDisplay(curData);
             _levelDisplays.Add(curData, obj);

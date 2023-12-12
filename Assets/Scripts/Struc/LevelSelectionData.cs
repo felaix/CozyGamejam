@@ -11,6 +11,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     [SerializeField]
     private List<ScriptableTier> _availableTiers = new();
     public List<ScriptableTier> UnlockedTiers { get; private set; } = new();
+    public List<LevelData> ActiveLevelDatas { get; private set; } = new();
 
     public int CurTierIndex;
 
@@ -33,6 +34,11 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     }
 
     private void SetActiveLevel(LevelData data) => CurLevelIndex = data.Index;
+
+    public void AddToLevelList(LevelData data)
+    {
+        ActiveLevelDatas.Add(data);
+    }
 
     private void UpdateLevelData(List<Vector2> totalPoints, float accuracy)
     {

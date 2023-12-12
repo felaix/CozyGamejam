@@ -14,6 +14,7 @@ public class LevelSelectItem : MonoBehaviour
 
     public void PrepareLevelDisplay(LevelData curData)
     {
+        //  BUG: curData == null
         if (ImageObj.TryGetComponent(out Image image)) image.sprite = curData.Image;
 
         _startBtn.onClick.RemoveAllListeners();

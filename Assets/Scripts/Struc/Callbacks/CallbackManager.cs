@@ -12,7 +12,7 @@ public class CallbackManager : Singleton<CallbackManager>
     public Action<LevelData> OnLevelReset;
     public Action<List<Vector2>, float> OnExitLevel;
 
-    public Action<Dictionary<int, LevelData>> OnShowLevelSelection;
+    public Action<List<LevelData>> OnShowLevelSelection;
 
     protected override void Awake()
     {

@@ -90,6 +90,7 @@ public class LevelSelectionController : MonoBehaviour
                 newData.AddIndex(levels[i].ID);
                 //  add levelData to dictionary
                 _selectionData.LevelDatas.Add(newData.Index, newData);
+                _selectionData.AddToLevelList(newData);
             }
         }
 
@@ -135,7 +136,7 @@ public class LevelSelectionController : MonoBehaviour
 
     private void LoadLevelImages()
     {
-        _callbacks.OnShowLevelSelection?.Invoke(_selectionData.LevelDatas);
+        _callbacks.OnShowLevelSelection?.Invoke(_selectionData.ActiveLevelDatas);
         //  compare total points with current unlocked and not unlocked tiers
         //  when new tiers are unlocked, show pop up
         //  either or not, display active levels
