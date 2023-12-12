@@ -48,8 +48,6 @@ public class LevelData
     public List<Vector2> AvailablePoints { get; set; } = new();
     public float Accuracy;
 
-    public List<Vector2> ReachedPoints { get; set; } = new();
-
     //  CurScore aus Accuracy und maxScore berechnen
     public int CurScore;
     private int _maxScore = 100;
