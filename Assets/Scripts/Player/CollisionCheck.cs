@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class CollisionCheck : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider2D col)
+    //public void OnTriggerEnter2D(Collider2D col)
+    //{
+    //    if (col.CompareTag("Point")) {
+    //        //Debug.Log("point found");
+    //        OutlineManager.Instance.DoSomething(col, transform.position);
+    //    }
+    //}
+
+    public void OnTriggerStay2D(Collider2D col)
     {
-        if (col.CompareTag("Point")) {
+        if (col.CompareTag("Point"))
+        {
             //Debug.Log("point found");
             OutlineManager.Instance.DoSomething(col, transform.position);
         }

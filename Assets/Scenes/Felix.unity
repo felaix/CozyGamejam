@@ -762,7 +762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae43187877c70d4e8ea690c6702d366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reductionFactor: 4
+  reductionFactor: 10
   testObj: {fileID: 2285552957571890004, guid: 5bf3cca02ca274544b9dac79ff9eb68a, type: 3}
   testParent: {fileID: 1723382838}
 --- !u!1 &1545441241

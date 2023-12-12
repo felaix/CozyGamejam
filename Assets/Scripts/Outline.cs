@@ -3,7 +3,7 @@ using UnityEngine;
 public class Outline : MonoBehaviour
 {
 
-    public int reductionFactor = 2;
+    public int reductionFactor = 5;
     public GameObject testObj;
     public Transform testParent;
 
@@ -35,6 +35,7 @@ public class Outline : MonoBehaviour
 
         // Get the vertices of the sprite
         Vector2[] spriteVertices = sprite.vertices;
+        Debug.Log($"Vertices: {spriteVertices.Length}");
 
         // ! Instantiate an object for each vertices
         // ! reductionFactor to reduce the amount of objects

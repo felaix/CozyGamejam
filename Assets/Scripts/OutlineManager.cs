@@ -123,7 +123,7 @@ public class OutlineManager : MonoBehaviour
 
         Debug.Log("Average Distance: " + averageDistance);
 
-        LevelController.Instance.FinishLevel(points, footpoints);
+        LevelController.Instance.FinishLevel(points, averageDistance);
 
         return averageDistance;
     }
