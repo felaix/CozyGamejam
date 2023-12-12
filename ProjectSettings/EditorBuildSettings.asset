@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Lucy.unity
-    guid: c427465e0dd5ea44eac8dbce67d12ba1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4470b70abc3ab5345bf9a3dc76215e06
+  - enabled: 1
+    path: Assets/Scenes/LevelSelection.unity
+    guid: 32f46fd533446c7459a1921973b947d2
   - enabled: 1
     path: Assets/Scenes/Level.unity
     guid: 61c0777b11fefa64c906c97f5fa6f627

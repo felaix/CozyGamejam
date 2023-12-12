@@ -9,6 +9,10 @@ public class GameManager : Singleton<GameManager>
 
     public bool StartWithMenu = true;
 
+    public bool IsMainMenu(int index) => index == 0;
+    public bool IsLevelSelection(int index) => index == 1;
+    public bool IsLevel(int index) => index != 0 && index != 1;
+
     protected override void Awake()
     {
         base.Awake();
@@ -35,9 +39,8 @@ public class GameManager : Singleton<GameManager>
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneID); //  call on MainMenu Press Play
         }
-
-        if (sceneID == 0) _callbacks.OnLoadMainMenu?.Invoke();
-        else if (sceneID == 1) _callbacks.OnLoadLevel?.Invoke();
+        if (IsMainMenu(sceneID)) _callbacks.OnLoadMainMenu?.Invoke();
+        else if (IsLevelSelection(sceneID)) _callbacks.OnLoadLevelSelection?.Invoke();
     }
 
     public void QuitGame() { Application.Quit(); }

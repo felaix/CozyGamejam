@@ -15,17 +15,16 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     private GameObject _eventObj;
 
+    private Sprite _curImage;
+    private List<Vector2> _reachedPoints = new();
+
     private void Awake()
     {
         NullCheck();
         _callbacks.OnLoadLevel += TestDebug;
     }
 
-    private void TestDebug()
-    {
-        Debug.Log("Start Game, _callbacks.OnStartLevel?.Invoke();");
-    }
-
+    //  --- PREPARATION ---
     private void NullCheck()
     {
         if (_callbacks == null) CreateCallbackManager();
@@ -49,5 +48,22 @@ public class LevelController : MonoBehaviour
         GameObject obj = Instantiate(new GameObject("GameManager"));
         obj.AddComponent<GameManager>();
         obj.GetComponent<GameManager>().StartWithMenu = false;
+    }
+
+    //  --- SCRIPT METHODS ---
+
+    //  called in each script, that needs to be loaded at levelStart
+    private void TestDebug(LevelData curData)
+    {
+        _curImage = curData.Image;
+        _reachedPoints = curData.ReachedPoints;
+        Debug.Log($"Image = {_curImage.name}, ReachedPoints = {_reachedPoints.Count}");
+    }
+
+    //  called, when: player presses button to leave
+    //                OR all points are reached
+    public void FinishLevel(List<Vector2> totalPoints, List<Vector2> reachedPoints)
+    {
+        _callbacks.OnExitLevel?.Invoke(totalPoints, reachedPoints);
     }
 }
