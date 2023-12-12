@@ -35,13 +35,13 @@ public class Outline : MonoBehaviour
 
         // Get the vertices of the sprite
         Vector2[] spriteVertices = sprite.vertices;
-        Debug.Log($"Vertices: {spriteVertices.Length}");
+        //Debug.Log($"Vertices: {spriteVertices.Length}");
 
         // ! Instantiate an object for each vertices
         // ! reductionFactor to reduce the amount of objects
         for (int i = 0; i < spriteVertices.Length; i += reductionFactor)
         {
-            Debug.Log("Sprite vertices: " + spriteVertices.Length);
+            //Debug.Log("Sprite vertices: " + spriteVertices.Length);
             Vector3 pixelPosition = spriteRenderer.transform.TransformPoint(spriteVertices[i]);
             Instantiate(testObj, pixelPosition, Quaternion.identity, testParent);
             OutlineManager.Instance.AddPoint(pixelPosition);

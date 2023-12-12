@@ -100,13 +100,6 @@ public class OutlineManager : MonoBehaviour
     {
         footpoints.Clear();
     }
-
-    //public void Compare()
-    //{
-    //    compared = false;
-    //    CompareAccuracy(footpoints, points);
-    //}
-
     public float CalculateAccuracy()
     {
         //calculated = true;
@@ -125,37 +118,19 @@ public class OutlineManager : MonoBehaviour
 
         LevelController.Instance.FinishLevel(points, averageDistance);
 
+        float scr = CalculateScore(averageDistance);
+        Debug.Log("score: " + scr);
+
         return averageDistance;
     }
 
-    //private void CompareAccuracy(List<Vector2> playerFootsteps, List<Vector2> points)
-    //{
-    //    // a total value 
-    //    float totalDistance = 0f;
-    //    compared = true;
-        
-    //    for (int i = 0; i < playerFootsteps.Count-1; i++)
-    //    {
-    //        // get the distance of each playerfootstep and the vertice/point of the outline
+    public float CalculateScore(float avdist)
+    {
+        float maxScore = 100f;
+        float maxDistance = 5f;
 
-    //        if (i > points.Count-1) break;
-    //        if (i > footpoints.Count-1) break;
+        float score = Mathf.Clamp01(1f - avdist / maxDistance) * maxScore;
 
-    //        float distance = Vector2.Distance(playerFootsteps[i], points[i]);
-
-    //        // add the distance to the total distance
-    //        totalDistance += distance;
-    //        //Debug.Log(distance);
-    //    }
-
-    //    // get the average distance by dividing the total distance by the count of footprints
-    //    float averageDistance = totalDistance / footpoints.Count;
-    //    //float score = averageDistance * multiplyAmount;
-
-    //    Debug.Log("Average Distance: " +  averageDistance);
-
-    //    LevelController.Instance.FinishLevel(points, footpoints);
-
-    //}
-
+        return score;
+    }
 }

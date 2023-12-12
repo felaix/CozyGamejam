@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -18,6 +20,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         DontDestroyOnLoad(gameObject);
         SetFrameRate(_frameRate);
+
+        _callbacks.OnExitLevel += ExitLevel;
+    }
+
+    private void ExitLevel(List<Vector2> list, float arg2)
+    {
+        LoadScene(1);
     }
 
     private void Start()

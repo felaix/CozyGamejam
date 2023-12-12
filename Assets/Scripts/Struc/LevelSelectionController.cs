@@ -60,8 +60,14 @@ public class LevelSelectionController : MonoBehaviour
     }
     private void CreateSelectionData()
     {
-        GameObject obj = Instantiate(_selectionObj);
-        _selectionData = obj.GetComponent<LevelSelectionData>();
+        if (LevelSelectionData.Instance == null)
+        {
+            GameObject obj = Instantiate(_selectionObj);
+            _selectionData = obj.GetComponent<LevelSelectionData>();
+        }else
+        {
+            _selectionData = LevelSelectionData.Instance;
+        }
     }
 
 
