@@ -47,6 +47,7 @@ MonoBehaviour:
   _availableTiers:
   - {fileID: 11400000, guid: 18805c578e597db41afee4f696d62bb6, type: 2}
   - {fileID: 11400000, guid: 4c0f31049fe4b2f4a9cd1224ecb25f1a, type: 2}
+  - {fileID: 11400000, guid: 9165b0e156e8c0047b441d2eda671e63, type: 2}
   CurTierIndex: -1
   CurLevelIndex: 0
   TotalScore: 0
