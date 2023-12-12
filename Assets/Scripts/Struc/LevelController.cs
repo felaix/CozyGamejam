@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 public class LevelController : Singleton<LevelController>
 {
     public Sprite CurImage { get; private set; }
-    public List<Vector2> ReachedPoints { get; private set; } = new();
-
+    public float Accuracy { get; private set; }
 
     //  --- REFERENCES ---
     private GameManager _gameManager => GameManager.Instance;
@@ -59,13 +58,13 @@ public class LevelController : Singleton<LevelController>
     {
         if (_selectionDatas.CurLevelData.Image == null) Debug.LogError($"TO FIX: level data has no image");
         CurImage = _selectionDatas.CurLevelData.Image;
-        ReachedPoints = _selectionDatas.CurLevelData.ReachedPoints;
+        Accuracy = _selectionDatas.CurLevelData.Accuracy;
     }
 
     //  called, when: player presses button to leave
     //                OR all points are reached
-    public void FinishLevel(List<Vector2> totalPoints, List<Vector2> reachedPoints)
+    public void FinishLevel(List<Vector2> totalPoints, float accuracy)
     {
-        _callbacks.OnExitLevel?.Invoke(totalPoints, reachedPoints);
+        _callbacks.OnExitLevel?.Invoke(totalPoints, accuracy);
     }
 }

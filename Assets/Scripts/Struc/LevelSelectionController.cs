@@ -32,7 +32,7 @@ public class LevelSelectionController : MonoBehaviour
     private void ResetLevel(LevelData data)
     {
         Debug.Log("RESET LEVEL");
-        data.ReachedPoints.Clear();
+        data.Accuracy = 0;
         CalculateScore();
     }
 

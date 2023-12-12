@@ -34,10 +34,10 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
 
     private void SetActiveLevel(LevelData data) => CurLevelIndex = data.Index;
 
-    private void UpdateLevelData(List<Vector2> totalPoints, List<Vector2> reachedPoints)
+    private void UpdateLevelData(List<Vector2> totalPoints, float accuracy)
     {
         if (!PlayedLevelBefore(CurLevelData)) CurLevelData.AddAvailablePoints(totalPoints);
-        CurLevelData.UpdateReachedPoints(reachedPoints);
+        CurLevelData.UpdateReachedPoints(accuracy);
     }
 }
 
@@ -46,9 +46,12 @@ public class LevelData
     public Sprite Image { get; set; }
     public int Index { get; set; }
     public List<Vector2> AvailablePoints { get; set; } = new();
+    public float Accuracy;
+
     public List<Vector2> ReachedPoints { get; set; } = new();
 
-    public int CurScore => _maxScore / AvailablePoints.Count * ReachedPoints.Count;
+    //  CurScore aus Accuracy und maxScore berechnen
+    public int CurScore;
     private int _maxScore = 100;
 
     public void AddImage(Sprite img) => Image = img;
@@ -58,9 +61,8 @@ public class LevelData
     public void AddAvailablePoints(List<Vector2> points) => AvailablePoints = points;
 
     //  call each time, exiting level
-    public void UpdateReachedPoints(List<Vector2> points)
+    public void UpdateReachedPoints(float accuracy)
     {
-        ReachedPoints.Clear();
-        ReachedPoints = points;
+        Accuracy = accuracy;
     }
 }
