@@ -58,13 +58,13 @@ public class LevelController : Singleton<LevelController>
     {
         if (_selectionDatas.CurLevelData.Image == null) Debug.LogError($"TO FIX: level data has no image");
         CurImage = _selectionDatas.CurLevelData.Image;
-        Accuracy = _selectionDatas.CurLevelData.Accuracy;
+        Accuracy = _selectionDatas.CurLevelData.Score;
     }
 
     //  called, when: player presses button to leave
     //                OR all points are reached
-    public void FinishLevel(List<Vector2> totalPoints, float accuracy)
+    public void FinishLevel(List<Vector2> totalPoints, float score)
     {
-        _callbacks.OnExitLevel?.Invoke(totalPoints, accuracy);
+        _callbacks.OnExitLevel?.Invoke(totalPoints, score);
     }
 }

@@ -52,7 +52,7 @@ public class LevelData
     public Sprite Image { get; set; }
     public int Index { get; set; }
     public List<Vector2> AvailablePoints { get; set; } = new();
-    public float Accuracy;
+    public float Score;
 
     //  CurScore aus Accuracy und maxScore berechnen
     public int CurScore;
@@ -65,8 +65,8 @@ public class LevelData
     public void AddAvailablePoints(List<Vector2> points) => AvailablePoints = points;
 
     //  call each time, exiting level
-    public void UpdateReachedPoints(float accuracy)
+    public void UpdateReachedPoints(float score)
     {
-        Accuracy = accuracy;
+        Score = score;
     }
 }
