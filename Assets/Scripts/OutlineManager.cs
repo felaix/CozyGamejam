@@ -100,6 +100,13 @@ public class OutlineManager : MonoBehaviour
     {
         footpoints.Clear();
     }
+
+    public void Calculate()
+    {
+        CalculateAccuracy();
+    }
+
+
     public float CalculateAccuracy()
     {
         //calculated = true;
