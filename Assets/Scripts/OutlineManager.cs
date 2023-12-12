@@ -118,10 +118,10 @@ public class OutlineManager : MonoBehaviour
 
         LevelController.Instance.FinishLevel(points, averageDistance);
 
-        float scr = CalculateScore(averageDistance);
-        Debug.Log("score: " + scr);
+        //float scr = CalculateScore(averageDistance);
+        //Debug.Log("score: " + scr);
 
-        return averageDistance;
+        return CalculateScore(averageDistance);
     }
 
     public float CalculateScore(float avdist)
