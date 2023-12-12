@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30aee142d84ac22438626ddab8ff309e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlines: []
   pointsTxt: {fileID: 831542708}
   sampleRate: 5
   footpoints: []
@@ -901,8 +902,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2a9f29ef59a268b41a557e4f5f257544, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c5233fbd45755f547952193b9f7d874b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.23921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -921,8 +922,8 @@ Transform:
   m_GameObject: {fileID: 1112425931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.217, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -939,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae43187877c70d4e8ea690c6702d366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reductionFactor: 2
+  reductionFactor: 4
   testObj: {fileID: 2285552957571890004, guid: 5bf3cca02ca274544b9dac79ff9eb68a, type: 3}
   testParent: {fileID: 1723382838}
 --- !u!1 &1545441241

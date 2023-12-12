@@ -8,6 +8,8 @@ public class OutlineManager : MonoBehaviour
 
     //[SerializeField] private float multiplyAmount;
 
+    [SerializeField] private List<ScriptableImage> outlines;
+
     [SerializeField] private TMP_Text pointsTxt;
     [SerializeField] private int sampleRate;
 
