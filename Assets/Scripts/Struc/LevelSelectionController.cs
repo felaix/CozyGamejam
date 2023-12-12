@@ -33,7 +33,6 @@ public class LevelSelectionController : MonoBehaviour
     {
         Debug.Log("RESET LEVEL");
         data.Score = 0;
-        CalculateScore();
     }
 
     private void Start()    { LoadLevelSelection(); }
@@ -99,39 +98,28 @@ public class LevelSelectionController : MonoBehaviour
 
     private bool CanUnlockNextTier()
     {
-        CalculateScore();
-        if (_selectionData.TotalScore == 0) return true;
-        else if (GetClosestTierForScore() > _selectionData.CurTierIndex) return true;
+        Debug.LogError("ERROR - need to fix");
+        if (_selectionData.CurTierIndex == -1) return true;
+        else if (GetActiveLevelScore() >= GetNextTierScore()) return true;
         return false;
     }
 
-    private void CalculateScore()
+    private int GetNextTierScore()
     {
-        for (int i = 0; i < _selectionData.LevelDatas.Count; i++)
-        {
-            _selectionData.TotalScore += _selectionData.LevelDatas[i].CurScore;
-        }
+        int nextTier = _selectionData.CurTierIndex++;
+        return _selectionData.AvailableTiers[nextTier].UnlockScore;
     }
 
-    private int GetClosestTierForScore()
+    private int GetActiveLevelScore()
     {
-        int closestTier = 0;
-        int lastTierScore = 0;
+        int activeLevelScore = 0;
 
-        for (int i = 0; i < _selectionData.AvailableTiers.Count; i++)
+        for (int i = 0; i < _selectionData.ActiveLevelDatas.Count; i++)
         {
-            int curTier = i;
-            int curTierScore = _selectionData.AvailableTiers[i].UnlockScore;
-            int newScore = _selectionData.TotalScore;
-
-            //  return tier, that is smaller than the requiredScore, but bigger than the lastTier
-            if (curTierScore > lastTierScore && curTierScore < newScore)
-            {
-                closestTier = curTier;
-            }
-            lastTierScore = curTierScore;
+            activeLevelScore += (int)_selectionData.ActiveLevelDatas[i].Score;
         }
-        return closestTier;
+
+        return activeLevelScore;
     }
 
     private void LoadLevelImages()
