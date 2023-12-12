@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LevelController : MonoBehaviour
+public class LevelController : Singleton<LevelController>
 {
     //  --- REFERENCES ---
     private GameManager _gameManager => GameManager.Instance;
@@ -18,8 +18,9 @@ public class LevelController : MonoBehaviour
     private Sprite _curImage;
     private List<Vector2> _reachedPoints = new();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         NullCheck();
         _callbacks.OnLoadLevel += TestDebug;
     }
