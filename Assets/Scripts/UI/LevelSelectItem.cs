@@ -17,8 +17,13 @@ public class LevelSelectItem : MonoBehaviour
         _startBtn.onClick.RemoveAllListeners();
         _startBtn.onClick.AddListener(() =>
         {
-            CallbackManager.Instance.OnLoadLevel?.Invoke(curData);
-            LevelSelectionWindow.Instance.HideWindow();
+            GameManager.Instance.LoadLevel(curData);
+        });
+
+        _resetBtn.onClick.RemoveAllListeners();
+        _resetBtn.onClick.AddListener(() =>
+        {
+            CallbackManager.Instance.OnLevelReset?.Invoke(curData);
         });
     }
 }

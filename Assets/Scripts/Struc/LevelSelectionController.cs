@@ -25,7 +25,15 @@ public class LevelSelectionController : MonoBehaviour
 
     private void Awake()
     {
+        _callbacks.OnLevelReset += ResetLevel;
         NullCheck();
+    }
+
+    private void ResetLevel(LevelData data)
+    {
+        Debug.Log("RESET LEVEL");
+        data.ReachedPoints.Clear();
+        CalculateScore();
     }
 
     private void Start()    { LoadLevelSelection(); }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelSelectionData : MonoBehaviour
+public class LevelSelectionData : Singleton<LevelSelectionData>
 {
     public LevelData CurLevelData => LevelDatas[CurLevelIndex];
 
@@ -21,8 +21,9 @@ public class LevelSelectionData : MonoBehaviour
     //  --- CONDITIONS ---
     private bool PlayedLevelBefore(LevelData data) => data.AvailablePoints.Count > 0;
     
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(this);
         CurTierIndex = -1;
 

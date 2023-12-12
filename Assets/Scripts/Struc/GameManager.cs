@@ -43,6 +43,12 @@ public class GameManager : Singleton<GameManager>
         else if (IsLevelSelection(sceneID)) _callbacks.OnLoadLevelSelection?.Invoke();
     }
 
+    public void LoadLevel(LevelData data)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        CallbackManager.Instance.OnLoadLevel?.Invoke(data);
+    }
+
     public void QuitGame() { Application.Quit(); }
     public void PauseGame(bool pause)   { if (pause) Time.timeScale = 0f; else Time.timeScale = 1f; }
 

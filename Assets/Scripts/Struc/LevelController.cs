@@ -6,23 +6,26 @@ using UnityEngine.EventSystems;
 
 public class LevelController : Singleton<LevelController>
 {
+    public Sprite CurImage { get; private set; }
+    public List<Vector2> ReachedPoints { get; private set; } = new();
+
+
     //  --- REFERENCES ---
     private GameManager _gameManager => GameManager.Instance;
     private CallbackManager _callbacks => CallbackManager.Instance;
     private EventSystemHandler _eventHandler => EventSystemHandler.Instance;
+    private LevelSelectionData selectionDatas => LevelSelectionData.Instance;
+
 
     //  --- VARIABLES ---
     [SerializeField]
     private GameObject _eventObj;
 
-    private Sprite _curImage;
-    private List<Vector2> _reachedPoints = new();
-
     protected override void Awake()
     {
         base.Awake();
         NullCheck();
-        _callbacks.OnLoadLevel += TestDebug;
+        DEBUGStartScene();
     }
 
     //  --- PREPARATION ---
@@ -54,11 +57,11 @@ public class LevelController : Singleton<LevelController>
     //  --- SCRIPT METHODS ---
 
     //  called in each script, that needs to be loaded at levelStart
-    private void TestDebug(LevelData curData)
+    private void DEBUGStartScene()
     {
-        _curImage = curData.Image;
-        _reachedPoints = curData.ReachedPoints;
-        Debug.Log($"Image = {_curImage.name}, ReachedPoints = {_reachedPoints.Count}");
+        CurImage = selectionDatas.CurLevelData.Image;
+        ReachedPoints = selectionDatas.CurLevelData.ReachedPoints;
+        Debug.Log($"START SCENE: Image = {CurImage.name}, ReachedPoints = {ReachedPoints.Count}");
     }
 
     //  called, when: player presses button to leave
