@@ -23,6 +23,8 @@ public class Outline : MonoBehaviour
         GetSpritePixels();
     }
 
+
+
     private void GetSpritePixels()
     {
         // Get SR
