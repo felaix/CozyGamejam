@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LevelController : Singleton<LevelController>
 {
@@ -11,7 +12,7 @@ public class LevelController : Singleton<LevelController>
     private GameManager _gameManager => GameManager.Instance;
     private CallbackManager _callbacks => CallbackManager.Instance;
     private EventSystemHandler _eventHandler => EventSystemHandler.Instance;
-    private LevelSelectionData selectionDatas => LevelSelectionData.Instance;
+    private LevelSelectionData _selectionDatas => LevelSelectionData.Instance;
 
 
     //  --- VARIABLES ---
@@ -56,9 +57,9 @@ public class LevelController : Singleton<LevelController>
     //  called in each script, that needs to be loaded at levelStart
     private void DEBUGStartScene()
     {
-        CurImage = selectionDatas.CurLevelData.Image;
-        ReachedPoints = selectionDatas.CurLevelData.ReachedPoints;
-        Debug.Log($"START SCENE: Image = {CurImage.name}, ReachedPoints = {ReachedPoints.Count}");
+        if (_selectionDatas.CurLevelData.Image == null) Debug.LogError($"TO FIX: level data has no image");
+        CurImage = _selectionDatas.CurLevelData.Image;
+        ReachedPoints = _selectionDatas.CurLevelData.ReachedPoints;
     }
 
     //  called, when: player presses button to leave
