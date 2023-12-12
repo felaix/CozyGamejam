@@ -15,4 +15,4 @@ MonoBehaviour:
   ImageData:
   - {fileID: 11400000, guid: 2016962d0fc4c8f47bb384b07951506f, type: 2}
   - {fileID: 11400000, guid: b00830c407e38084380fcccfcffc8379, type: 2}
-  UnlockScore: 0
+  UnlockScore: 20
