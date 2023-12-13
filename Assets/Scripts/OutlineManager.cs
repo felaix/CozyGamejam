@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
 
@@ -15,68 +17,52 @@ public class OutlineManager : MonoBehaviour
 
     [SerializeField] private List<Vector2> footpoints;
     [SerializeField] private List<Vector2> points;
-    //[SerializeField] private List<float> smallestDistances;
-    //[SerializeField] private List<Vector2> reachedPoints;
 
-    //private PolygonCollider2D outlineCollider;
 
-    //private bool compared = false;
-    //private bool calculated = false;
-
-    [SerializeField] private List<(Collider2D col, float smallestDistance)> tuples = new();
-
-    //private (Collider2D pointCol, float smallestDistance) pointTuple = (null, 100);
+    private Dictionary<Collider2D, float> _pointDistances = new();
     
     private void Awake()
     {
         if (Instance == null) Instance = this;
     }
 
-    //public bool CheckCollision(Vector2 pos)
-    //{
-    //    return outlineCollider.OverlapPoint(pos);
-    //}
-
-    public void DoSomething(Collider2D col, Vector2 playerPos)
+    public void CheckDistance(Collider2D col, Vector2 playerPos)
     {
-        // ! Get the index
-        // ! If the col doesn't exist, the index will be -1
-        // ! When the index is -1, create a new tuple
+        float newDis = GetDistance(col, playerPos);
 
-        // ! If the index is higher then 1, it means that you already collided with the collisison
-        // ! if thats the case, check if the distance is smaller than the stored distance
-        // ! if the distance is smaller: overwrite the distance
-
-        int index = tuples.FindIndex(tuple => tuple.col == col);
-
-        //Debug.Log("col alr exist" + index);
-
-        if (index >= 0)
+        //  first time triggering point
+        if (IsFirstVisit(col)) 
         {
-            float distance = Vector2.Distance(col.transform.position, playerPos);
-            float oldDistance = tuples[index].smallestDistance;
-
-            //Debug.Log($"old dist: {oldDistance}, new dist: {distance}");
-
-            if (distance < tuples[index].smallestDistance) { tuples[index] = (col, distance); }
-        }else
+            AddPointAsEntry(col, newDis);
+        }
+        else
         {
-            (Collider2D newCol, float dist) newTuple = (col, Vector2.Distance(col.transform.position, playerPos));
-            tuples.Add(newTuple);
+            float lastDis = GetLastDistance(col);
+            float shortestDis = GetShortestDistance(GetLastDistance(col), newDis);
+
+            if (shortestDis != lastDis)
+            {
+                _pointDistances.Remove(col);
+                AddPointAsEntry(col, shortestDis);
+            }
         }
 
-        if (tuples.Count >= points.Count)
-        {
-            // ! All points reached -> level completed
-            Debug.Log("All points reached");
-
-            CalculateAccuracy();
-        }
+        if (AllPointsReached) ReturnToLevelSelection();
     }
 
-    public void AddPoint(Vector2 point)
+    public float GetScore()
     {
-        points.Add(point);
+        Debug.Log($"Total Distance: {TotalDistance}, Total Accuracy: {TotalAccuracy}");
+        //  differenz zwischen _pointDistances.count und points.count
+        //  => negativ berücksichtigen, dafür sollte ne schlechte akkuratheit genutzt werden
+        //  int notReachedPoints * ;
+
+        float maxScore = 100f;
+        float maxDistance = 5f;
+
+        float score = Mathf.Clamp01(1f - TotalAccuracy / maxDistance) * maxScore;
+
+        return score;
     }
 
     public void AddFootStep(Vector2 point)
@@ -91,53 +77,26 @@ public class OutlineManager : MonoBehaviour
         //}
     }
 
-    public void ResetPoints()
+    public void ResetPoints() => points.Clear();
+    public void ResetFootSteps() => footpoints.Clear();
+    public void AddPoint(Vector2 point) => points.Add(point);
+
+    private void AddPointAsEntry(Collider2D col, float distance) => _pointDistances.Add(col, distance);
+
+
+    public bool AllPointsReached => _pointDistances.Count >= points.Count;
+    public bool IsFirstVisit(Collider2D col) => !_pointDistances.ContainsKey(col);
+
+
+    public float TotalDistance => _pointDistances.Values.Sum();
+    public float TotalAccuracy => TotalDistance / points.Count;
+
+    private float GetDistance(Collider2D col, Vector2 playerPos) => Vector2.Distance(col.transform.position, playerPos);
+    private float GetLastDistance(Collider2D col) => _pointDistances.GetValueOrDefault(col);
+    private float GetShortestDistance(float lastDis, float newDis) => Mathf.Min(lastDis, newDis);
+
+    public void ReturnToLevelSelection()
     {
-        points.Clear();
-    }
-
-    public void ResetFootSteps()
-    {
-        footpoints.Clear();
-    }
-
-    public void Calculate()
-    {
-        CalculateAccuracy();
-    }
-
-
-    public float CalculateAccuracy()
-    {
-        //calculated = true;
-        float totalDistance = 0;
-
-        for (int i = 0; i < tuples.Count; i++)
-        {
-            totalDistance += tuples[i].smallestDistance;
-        }
-
-        Debug.Log("Total Distance: " + totalDistance);
-
-        float averageDistance = totalDistance / tuples.Count;
-
-        Debug.Log("Average Distance: " + averageDistance);
-
-        LevelController.Instance.FinishLevel(points, averageDistance);
-
-        //float scr = CalculateScore(averageDistance);
-        //Debug.Log("score: " + scr);
-
-        return CalculateScore(averageDistance);
-    }
-
-    public float CalculateScore(float avdist)
-    {
-        float maxScore = 100f;
-        float maxDistance = 5f;
-
-        float score = Mathf.Clamp01(1f - avdist / maxDistance) * maxScore;
-
-        return score;
+        LevelController.Instance.FinishLevel(points, GetScore());
     }
 }

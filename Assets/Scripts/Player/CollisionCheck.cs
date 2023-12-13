@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class CollisionCheck : MonoBehaviour
 {
-    //public void OnTriggerEnter2D(Collider2D col)
-    //{
-    //    if (col.CompareTag("Point")) {
-    //        //Debug.Log("point found");
-    //        OutlineManager.Instance.DoSomething(col, transform.position);
-    //    }
-    //}
+    private Collider2D _curCollider;
+    private Collider2D _lastCollider;
 
-    public void OnTriggerStay2D(Collider2D col)
+    public bool IsCurrentCollider(Collider2D col) => col == _curCollider;
+    public bool IsLastCollider(Collider2D col) => col == _lastCollider;
+    public bool IsFirstCollider() => _lastCollider == null;
+
+    public void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Point"))
         {
-            //Debug.Log("point found");
-            OutlineManager.Instance.DoSomething(col, transform.position);
+            if (IsFirstCollider() || !IsLastCollider(col))
+            {
+                _curCollider = col;
+            }
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D col)
+    {
+        if (col == _curCollider)
+        {
+            OutlineManager.Instance.CheckDistance(col, transform.position);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D col)
+    {
+        if (IsCurrentCollider(col))
+        {
+            _lastCollider = _curCollider;
         }
     }
 }
