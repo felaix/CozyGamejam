@@ -31,6 +31,9 @@ public class OutlineManager : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.PlayMusic("StandardMusic");
+
+
+        //LevelController.Instance.
     }
 
     public void CheckDistance(Collider2D col, Vector2 playerPos)
@@ -69,18 +72,22 @@ public class OutlineManager : MonoBehaviour
         //  int notReachedPoints * ;
 
         int notReachedPoints = (points.Count - _pointDistances.Count) * 2;
+        int penaltyForTooManyFootsteps = (points.Count - footpoints.Count) * 2;
 
 
         if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 3; }
 
+        int penalty = Mathf.Abs(notReachedPoints + penaltyForTooManyFootsteps);
+
         float maxScore = 100f;
         float maxAccuracy = 2f;
 
-        float score = Mathf.Clamp01(1f - TotalAccuracy / maxAccuracy) * maxScore - notReachedPoints;
-        Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {notReachedPoints}");
+        float score = Mathf.Clamp01(1f - TotalAccuracy / maxAccuracy) * maxScore - penalty;
+        Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {notReachedPoints}, penalty for footsteps: {penaltyForTooManyFootsteps}, total penalty: {penalty}");
         Debug.Log("Score: " + score);
 
         if (score < 0f) score = 0f;
+        if (score > 100f) score = 100f;
 
         return score;
     }
