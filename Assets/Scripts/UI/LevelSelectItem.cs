@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -15,7 +14,20 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField]
     private float _animDuration;
 
+    [SerializeField]
+    private Image _bgHovered;
+    [SerializeField]
+    private Image _bgUnhovered;
+    private Color NotVisibleColor(Image img) => new(ColorR(img), ColorG(img), ColorB(img), 0);
+    private Color VisibleColor(Image img) => new(ColorR(img), ColorG(img), ColorB(img), 1);
+
+    private float ColorR(Image img) => img.color.r;
+    private float ColorG(Image img) => img.color.g;
+    private float ColorB(Image img) => img.color.b;
+
+
     private IEnumerator _scaleAnimation;
+    private IEnumerator _bgAnimation;
 
     private bool HasImageComponent => ImageObj.TryGetComponent<Image>(out Image img);
 
@@ -27,12 +39,22 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void SetScale(Vector3 scale) => gameObject.transform.localScale = scale;
     private void SetOutlineImage(LevelData data) { ImageComponent.sprite = data.Image; }
 
+    private void SetCoroutineScale(Vector3 target) { _scaleAnimation = AnimateScale(target); }
+    private void SetCoroutineBackground(bool hovered) { _bgAnimation = AnimateBackground(hovered); }
+
+    private void ClearAnimations() { ClearScaleAnim(); ClearBgAnim(); }
+    private void ClearScaleAnim() { StopCoroutine(_scaleAnimation); _scaleAnimation = null; }
+    private void ClearBgAnim() { StopCoroutine (_bgAnimation); _bgAnimation = null;}
+
     public void PrepareLevelDisplay(LevelData curData)
     {
         SetScale(UnhoveredScale);
+        _bgHovered.color = NotVisibleColor(_bgHovered);
+        _bgUnhovered.color = VisibleColor(_bgUnhovered);
         SetOutlineImage(curData);
         SetButtons(curData);
     }
+
 
     private void SetButtons(LevelData data)
     {
@@ -49,23 +71,27 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
         });
     }
 
-    private void SetCoroutine(Vector3 target) { _scaleAnimation = AnimateScale(target); }
-    private void ClearAnimation() { StopCoroutine(_scaleAnimation); _scaleAnimation = null; }
-
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_scaleAnimation != null) ClearAnimation();
-        SetCoroutine(HoveredScale);
-        StartCoroutine(_scaleAnimation);
+        if (_scaleAnimation != null) ClearAnimations();
+        AnimateButton(HoveredScale, true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_scaleAnimation != null) ClearAnimation();
-        SetCoroutine(UnhoveredScale);
-        StartCoroutine(_scaleAnimation);
+        if (_scaleAnimation != null) ClearAnimations();
+        AnimateButton(UnhoveredScale, false);
     }
+
+    private void AnimateButton(Vector3 targetScale, bool hovered)
+    {
+        SetCoroutineScale(targetScale);
+        SetCoroutineBackground(hovered);
+
+        StartCoroutine(_scaleAnimation);
+        StartCoroutine(_bgAnimation);
+    }
+
 
     IEnumerator AnimateScale(Vector3 target)
     {
@@ -79,5 +105,38 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
             yield return null;
         }
         SetScale(target);
+    }
+
+    IEnumerator AnimateBackground(bool hovered)
+    {
+        float passedTime = 0f;
+
+        while (passedTime <= _animDuration)
+        {
+            passedTime += Time.deltaTime;
+            if (hovered)
+            {
+                _bgHovered.color = Color.Lerp(_bgHovered.color, VisibleColor(_bgHovered), passedTime);
+                _bgUnhovered.color = Color.Lerp(_bgUnhovered.color, NotVisibleColor(_bgUnhovered), passedTime);
+            }
+            else
+            {
+                _bgHovered.color = Color.Lerp(_bgHovered.color, NotVisibleColor(_bgHovered), passedTime);
+                _bgUnhovered.color = Color.Lerp(_bgUnhovered.color, VisibleColor(_bgUnhovered), passedTime);
+            }
+
+            yield return null;
+        }
+
+        if (hovered)
+        {
+            _bgHovered.color = VisibleColor(_bgHovered);
+            _bgUnhovered.color = NotVisibleColor(_bgUnhovered);
+        }
+        else
+        {
+            _bgHovered.color = NotVisibleColor(_bgHovered);
+            _bgUnhovered.color = VisibleColor(_bgUnhovered);
+        }
     }
 }
