@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Engel
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 66540757d17c0be42a969d8f6bd84306, type: 3}
+  ImageToCode: {fileID: 21300000, guid: 66540757d17c0be42a969d8f6bd84306, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: 2b4ee2f0f29663749b86df98992f6b60, type: 3}
   ID: 1

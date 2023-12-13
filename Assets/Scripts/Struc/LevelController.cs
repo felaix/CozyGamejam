@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 
 public class LevelController : Singleton<LevelController>
 {
-    public Sprite CurImage { get; private set; }
+    public Sprite CurImageToCode { get; private set; }
+    public Sprite CurImageToDisplay { get; private set; }
     public float Accuracy { get; private set; }
 
     //  --- REFERENCES ---
@@ -56,8 +57,9 @@ public class LevelController : Singleton<LevelController>
     //  called in each script, that needs to be loaded at levelStart
     private void DEBUGStartScene()
     {
-        if (_selectionDatas.CurLevelData.Image == null) Debug.LogError($"TO FIX: level data has no image");
-        CurImage = _selectionDatas.CurLevelData.Image;
+        if (_selectionDatas.CurLevelData.ImageToCode == null) Debug.LogError($"TO FIX: level data has no image");
+        CurImageToCode = _selectionDatas.CurLevelData.ImageToCode;
+        CurImageToDisplay = _selectionDatas.CurLevelData.ImageToDisplay;
         Accuracy = _selectionDatas.CurLevelData.Score;
     }
 

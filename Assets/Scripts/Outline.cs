@@ -14,7 +14,7 @@ public class Outline : MonoBehaviour
     {
         outlineRenderer = GetComponent<SpriteRenderer>();
 
-        outlineRenderer.sprite = LevelController.Instance.CurImage;
+        outlineRenderer.sprite = LevelController.Instance.CurImageToCode;
 
         GetSpritePixels();
     }

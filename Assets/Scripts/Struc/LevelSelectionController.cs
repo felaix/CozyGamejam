@@ -99,7 +99,8 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
     private LevelData GetCreatedLevelData(ScriptableImage img)
     {
         LevelData newData = new();
-        newData.AddImage(img.Image);
+        newData.AddImageToCode(img.ImageToCode);
+        newData.AddImageToDisplay(img.ImageToDisplay);
         newData.AddIndex(img.ID);
         return newData;
     }

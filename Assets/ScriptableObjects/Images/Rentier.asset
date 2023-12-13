@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Rentier
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 8dc05a3b5159fc1439814beb82b940ca, type: 3}
+  ImageToCode: {fileID: 21300000, guid: 8dc05a3b5159fc1439814beb82b940ca, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: c0b58ee5462d4a249bc62557fbc39b35, type: 3}
   ID: 5

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Lebkuchen
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: bae46e84118308c4ca12e36fb28fbc67, type: 3}
+  ImageToCode: {fileID: 21300000, guid: bae46e84118308c4ca12e36fb28fbc67, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: 1e476250cef800447a290d4b35da8063, type: 3}
   ID: 3

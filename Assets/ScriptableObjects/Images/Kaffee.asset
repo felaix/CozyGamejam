@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Kaffee
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 01e3ae8689622424b89a8e566c6a8f76, type: 3}
+  ImageToCode: {fileID: 21300000, guid: 906be0c8a7e09f449b650a165e48d6dd, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: 01e3ae8689622424b89a8e566c6a8f76, type: 3}
   ID: 2

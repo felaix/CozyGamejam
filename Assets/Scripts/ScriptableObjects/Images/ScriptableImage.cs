@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/New Image")]
 public class ScriptableImage : ScriptableObject
 {
-    public Sprite Image;
+    public Sprite ImageToCode;
+    public Sprite ImageToDisplay;
     public int ID;
 }

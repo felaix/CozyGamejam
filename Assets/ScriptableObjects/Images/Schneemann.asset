@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Schneemann
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: b686eae7a0c24ae4fa4d6a9a83c43a20, type: 3}
+  ImageToCode: {fileID: 21300000, guid: b686eae7a0c24ae4fa4d6a9a83c43a20, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: 8ef65a407dc12ee49a3f288fbeb7601f, type: 3}
   ID: 7

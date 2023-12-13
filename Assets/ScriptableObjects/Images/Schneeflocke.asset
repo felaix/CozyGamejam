@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Schneeflocke
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 02d5c961279990644a8ca584bc67ac67, type: 3}
+  ImageToCode: {fileID: 21300000, guid: 02d5c961279990644a8ca584bc67ac67, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: 474affb7c8f50394aaf3ab30c2b437f6, type: 3}
   ID: 6

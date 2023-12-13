@@ -37,7 +37,7 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Image ImageComponent => HasImageComponent? ImageObj.GetComponent<Image>() : null;
 
     private void SetScale(Vector3 scale) => gameObject.transform.localScale = scale;
-    private void SetOutlineImage(LevelData data) { ImageComponent.sprite = data.Image; }
+    private void SetOutlineImage(LevelData data) { ImageComponent.sprite = data.ImageToDisplay; }
 
     private void SetCoroutineScale(Vector3 target) { _scaleAnimation = AnimateScale(target); }
     private void SetCoroutineBackground(bool hovered) { _bgAnimation = AnimateBackground(hovered); }

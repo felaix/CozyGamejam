@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e4ac905764a9345a597f4803fc9df4, type: 3}
   m_Name: Zuckerstange
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 5066ce45ebc69a74ab65f990d1d954c8, type: 3}
+  ImageToCode: {fileID: 21300000, guid: 5066ce45ebc69a74ab65f990d1d954c8, type: 3}
+  ImageToDisplay: {fileID: 21300000, guid: 9132bd875865d02429694db6ae84b597, type: 3}
   ID: 11

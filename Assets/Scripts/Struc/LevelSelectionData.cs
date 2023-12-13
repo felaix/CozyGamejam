@@ -46,12 +46,14 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
 
 public class LevelData
 {
-    public Sprite Image { get; set; }
+    public Sprite ImageToCode { get; set; }
+    public Sprite ImageToDisplay { get; set; }
     public int Index { get; set; }
     public List<Vector2> AvailablePoints { get; set; } = new();
     public float Score;
 
-    public void AddImage(Sprite img) => Image = img;
+    public void AddImageToCode(Sprite img) => ImageToCode = img;
+    public void AddImageToDisplay(Sprite img) => ImageToDisplay = img;
     public void AddIndex(int index) => Index = index;
 
     //  call, when return from first levelStart
