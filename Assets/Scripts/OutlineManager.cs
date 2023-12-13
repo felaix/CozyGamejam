@@ -57,10 +57,17 @@ public class OutlineManager : MonoBehaviour
         //  => negativ berücksichtigen, dafür sollte ne schlechte akkuratheit genutzt werden
         //  int notReachedPoints * ;
 
-        float maxScore = 100f;
-        float maxDistance = 5f;
+        int notReachedPoints = points.Count - _pointDistances.Count;
+        //int notReachedPointsMultiplier = notReachedPoints * 2;
 
-        float score = Mathf.Clamp01(1f - TotalAccuracy / maxDistance) * maxScore;
+        if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 2; }
+
+        float maxScore = 100f;
+        float maxAccuracy = 2f;
+
+        float score = Mathf.Clamp01(1f - TotalAccuracy / maxAccuracy) * maxScore - notReachedPoints;
+        Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {notReachedPoints}");
+        Debug.Log("Score: " + score);
 
         return score;
     }

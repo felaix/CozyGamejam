@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 603915614}
         m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
-        m_MethodName: Calculate
+        m_MethodName: ReturnToLevelSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
