@@ -14,6 +14,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     public List<LevelData> ActiveLevelDatas { get; private set; } = new();
 
     public int CurTierIndex;
+    public int NextTierIndex => CurTierIndex + 1;
 
     public Dictionary<int, LevelData> LevelDatas = new();
     public int CurLevelIndex = 0; // set on level load
@@ -34,11 +35,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     }
 
     private void SetActiveLevel(LevelData data) => CurLevelIndex = data.Index;
-
-    public void AddToLevelList(LevelData data)
-    {
-        ActiveLevelDatas.Add(data);
-    }
+    public void AddToLevelList(LevelData data) => ActiveLevelDatas.Add(data);
 
     private void UpdateLevelData(List<Vector2> totalPoints, float accuracy)
     {
@@ -53,10 +50,6 @@ public class LevelData
     public int Index { get; set; }
     public List<Vector2> AvailablePoints { get; set; } = new();
     public float Score;
-
-    //  CurScore aus Accuracy und maxScore berechnen
-    public int CurScore;
-    private int _maxScore = 100;
 
     public void AddImage(Sprite img) => Image = img;
     public void AddIndex(int index) => Index = index;
