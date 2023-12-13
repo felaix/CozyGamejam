@@ -13,10 +13,6 @@ public class Outline : MonoBehaviour
     private void Start()
     {
         outlineRenderer = GetComponent<SpriteRenderer>();
-        //outlineRenderer = LevelController.Instance.
-        //outlineRenderer.sprite = LevelController.
-
-        //originalTexture = outlineRenderer.sprite.texture;
 
         outlineRenderer.sprite = LevelController.Instance.CurImage;
 
