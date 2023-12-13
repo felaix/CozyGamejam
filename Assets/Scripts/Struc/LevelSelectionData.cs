@@ -32,6 +32,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
         CallbackManager callbacks = CallbackManager.Instance;
         callbacks.OnLoadLevel += SetActiveLevel;
         callbacks.OnExitLevel += UpdateLevelData;
+        callbacks.OnLevelReset += ResetLevel;
     }
 
     private void SetActiveLevel(LevelData data) => CurLevelIndex = data.Index;
@@ -41,6 +42,12 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     {
         if (!PlayedLevelBefore(CurLevelData)) CurLevelData.AddAvailablePoints(totalPoints);
         CurLevelData.UpdateReachedPoints(accuracy);
+    }
+
+    private void ResetLevel(LevelData data)
+    {
+        Debug.Log("RESET LEVEL");
+        data.Score = 0;
     }
 }
 

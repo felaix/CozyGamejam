@@ -8,9 +8,7 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public GameObject ImageObj;
 
     [SerializeField]
-    private Button _startBtn;
-    [SerializeField]
-    private Button _resetBtn;
+    private Button _levelBtn;
     [SerializeField]
     private float _animDuration;
 
@@ -58,8 +56,8 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void SetButtons(LevelData data)
     {
-        _startBtn.onClick.RemoveAllListeners();
-        _startBtn.onClick.AddListener(() =>
+        _levelBtn.onClick.RemoveAllListeners();
+        _levelBtn.onClick.AddListener(() =>
         {
             GameManager.Instance.LoadLevel(data);
         });
@@ -69,6 +67,7 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             CallbackManager.Instance.OnLevelReset?.Invoke(data);
         });
+        */
     }
 
     public void OnPointerEnter(PointerEventData eventData)

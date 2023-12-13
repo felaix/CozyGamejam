@@ -32,14 +32,7 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
     protected override void Awake()
     {
         base.Awake();
-        _callbacks.OnLevelReset += ResetLevel;
         NullCheck();
-    }
-
-    private void ResetLevel(LevelData data)
-    {
-        Debug.Log("RESET LEVEL");
-        data.Score = 0;
     }
 
     private void Start() { LoadLevelSelection(); }
