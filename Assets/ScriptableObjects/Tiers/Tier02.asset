@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e01b922653a20cd49a5cf4d33fa6cb6d, type: 2}
   - {fileID: 11400000, guid: 64c66ea429091bd469527a01c78e1799, type: 2}
   - {fileID: 11400000, guid: 5a3e8482a50a8f249b316ec49a574809, type: 2}
-  UnlockScore: 50
+  UnlockScore: 300

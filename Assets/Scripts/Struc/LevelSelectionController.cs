@@ -8,6 +8,8 @@ public class LevelSelectionController : MonoBehaviour
     //  --- REFERENCES ---
     private CallbackManager _callbacks => CallbackManager.Instance;
     private GameManager _gameManager => GameManager.Instance;
+    [SerializeField]
+    private GameObject _uiToSpawn;
 
     [SerializeField]
     private GameObject _selectionObj;
@@ -90,6 +92,7 @@ public class LevelSelectionController : MonoBehaviour
                 //  add levelData to dictionary
                 _selectionData.LevelDatas.Add(newData.Index, newData);
                 _selectionData.AddToLevelList(newData);
+                _selectionData.CurTierIndex = nextTier;
             }
         }
 
@@ -98,7 +101,6 @@ public class LevelSelectionController : MonoBehaviour
 
     private bool CanUnlockNextTier()
     {
-        Debug.LogError("ERROR - need to fix");
         if (_selectionData.CurTierIndex == -1) return true;
         else if (GetActiveLevelScore() >= GetNextTierScore()) return true;
         return false;
@@ -124,9 +126,9 @@ public class LevelSelectionController : MonoBehaviour
 
     private void LoadLevelImages()
     {
-        _callbacks.OnShowLevelSelection?.Invoke(_selectionData.ActiveLevelDatas);
-        //  compare total points with current unlocked and not unlocked tiers
-        //  when new tiers are unlocked, show pop up
-        //  either or not, display active levels
+        GameObject selectionUI = Instantiate(_uiToSpawn);
+        LevelSelectionWindow ui = selectionUI.GetComponent<LevelSelectionWindow>();
+        ui.Levels = _selectionData.ActiveLevelDatas;
+        ui.ShowWindow();
     }
 }

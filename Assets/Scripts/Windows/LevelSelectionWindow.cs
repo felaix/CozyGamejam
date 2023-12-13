@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Authentication.ExtendedProtection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,31 +11,32 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
     [SerializeField]
     private GameObject _buttonPrefab;
 
-    public GameObject Levels;
+    [SerializeField]
+    private GameObject _levelsObj;
 
     private Dictionary<LevelData, GameObject> _levelDisplays = new();
+
+    public List<LevelData> Levels;
 
     protected override void Awake()
     {
         base.Awake();
-        CallbackManager.Instance.OnShowLevelSelection += Show;
+        //  CallbackManager.Instance.OnShowLevelSelection += Show;
     }
 
-    private void Show(List<LevelData> levels)
+    public override void ShowWindow()
     {
-        CreateLevelDisplays(levels);
+        CreateLevelDisplays();
         base.ShowWindow();
     }
 
-    private void CreateLevelDisplays(List<LevelData> levels)
+    private void CreateLevelDisplays()
     {
-        //  change input to:
-        //  only levelDatas (but from all available tiers, as long as i < curTier/ or nextTier
-        for (int i = 0; i < levels.Count; i++)
+        for (int i = 0; i < Levels.Count; i++)
         {
-            LevelData curData = levels[i];
-            
-            GameObject obj = Instantiate(_buttonPrefab, Levels.transform);
+            LevelData curData = Levels[i];
+
+            GameObject obj = Instantiate(_buttonPrefab, _levelsObj.transform);
             obj.GetComponent<LevelSelectItem>().PrepareLevelDisplay(curData);
             _levelDisplays.Add(curData, obj);
         }
