@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footprintsPrefab: {fileID: 3939398499326205973, guid: 7e4d9d7ada076664eb317fb96ae8e578, type: 3}
   spd: 2
-  footprintSpawnInterval: 0.05
+  footprintSpawnInterval: 0.3
 --- !u!61 &7763021224948699602
 BoxCollider2D:
   m_ObjectHideFlags: 0

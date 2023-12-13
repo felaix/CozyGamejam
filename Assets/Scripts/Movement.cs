@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject footprintsPrefab;
 
     [SerializeField] private float spd = 5f;
-    [SerializeField] private float footprintSpawnInterval = 1f;
+    [SerializeField] private float footprintSpawnInterval = .3f;
 
     private DefaultInputActions input;
     private Vector2 movementInput;
@@ -63,12 +63,14 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        
 
         timer += Time.deltaTime;
 
-        if (timer >= footprintSpawnInterval)
+        if (timer >= footprintSpawnInterval && isMoving)
         {
             InstantiateFootprint();
+            SoundManager.Instance.PlaySFX("Footsteps");
             timer = 0;
         }
 
