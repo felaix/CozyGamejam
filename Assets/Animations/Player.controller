@@ -29,7 +29,7 @@ AnimatorStateMachine:
     m_Position: {x: 520, y: -360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4011995804274326633}
-    m_Position: {x: 670, y: -60, z: 0}
+    m_Position: {x: 840, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 3640344588725105026}
@@ -85,7 +85,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 404963474a23c7240848702f3297c196, type: 2}
-    m_Threshold: 0.25
+    m_Threshold: 0.1875
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -93,7 +93,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: d99edd3fdeacc8b4ca23c67b609c5b69, type: 2}
-    m_Threshold: 0.5
+    m_Threshold: 0.375
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -101,7 +101,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: fa6a481ceeb964749ad69707989608df, type: 2}
-    m_Threshold: 0.75
+    m_Threshold: 0.5625
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -110,7 +110,7 @@ BlendTree:
   m_BlendParameter: Horizontal
   m_BlendParameterY: Vertical
   m_MinThreshold: 0
-  m_MaxThreshold: 0.75
+  m_MaxThreshold: 0.5625
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 1
@@ -274,7 +274,7 @@ AnimatorState:
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
-  m_Mirror: 0
+  m_Mirror: 1
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
@@ -318,7 +318,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WalkBlendTree
-  m_Speed: 0.2
+  m_Speed: 0.1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

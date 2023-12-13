@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
         if (!isMoving) return;
 
         float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
-        Instantiate(footprintsPrefab, transform.position, Quaternion.Euler(0f, 0f, angle));
+        Instantiate(footprintsPrefab, transform.position, Quaternion.Euler(0f, 0f, angle-90f));
     }
 
     private void Update()
@@ -91,11 +91,4 @@ public class Movement : MonoBehaviour
 
         Move();
     }
-
-    //private void FixedUpdate()
-    //{
-    //    UpdateAnimator();
-    //}
-
-
 }

@@ -28,6 +28,11 @@ public class OutlineManager : MonoBehaviour
         if (Instance == null) Instance = this;
     }
 
+    private void Start()
+    {
+        SoundManager.Instance.PlayMusic("StandardMusic");
+    }
+
     public void CheckDistance(Collider2D col, Vector2 playerPos)
     {
         float newDis = GetDistance(col, playerPos);
@@ -63,10 +68,10 @@ public class OutlineManager : MonoBehaviour
         //  => negativ berücksichtigen, dafür sollte ne schlechte akkuratheit genutzt werden
         //  int notReachedPoints * ;
 
-        int notReachedPoints = points.Count - _pointDistances.Count;
-        //int notReachedPointsMultiplier = notReachedPoints * 2;
+        int notReachedPoints = (points.Count - _pointDistances.Count) * 2;
 
-        if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 2; }
+
+        if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 3; }
 
         float maxScore = 100f;
         float maxAccuracy = 2f;
@@ -74,6 +79,8 @@ public class OutlineManager : MonoBehaviour
         float score = Mathf.Clamp01(1f - TotalAccuracy / maxAccuracy) * maxScore - notReachedPoints;
         Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {notReachedPoints}");
         Debug.Log("Score: " + score);
+
+        if (score < 0f) score = 0f;
 
         return score;
     }
@@ -87,13 +94,6 @@ public class OutlineManager : MonoBehaviour
     public void AddFootStep(Vector2 point)
     {
         footpoints.Add(point);
-
-        //if (compared) return;
-
-        //if (footpoints.Count >= points.Count) 
-        //{
-        //    CompareAccuracy(footpoints, points);
-        //}
     }
 
     public void ResetPoints() => points.Clear();
