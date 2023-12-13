@@ -12,12 +12,14 @@ public class OutlineManager : MonoBehaviour
 
     [SerializeField] private List<ScriptableImage> outlines;
 
-    [SerializeField] private TMP_Text pointsTxt;
+    //[SerializeField] private TMP_Text pointsTxt;
     [SerializeField] private int sampleRate;
 
     [SerializeField] private List<Vector2> footpoints;
     [SerializeField] private List<Vector2> points;
 
+    [SerializeField] private GameObject scoreUI;
+    [SerializeField] private TMP_Text scoreTMP;
 
     private Dictionary<Collider2D, float> _pointDistances = new();
     
@@ -47,8 +49,13 @@ public class OutlineManager : MonoBehaviour
             }
         }
 
-        if (AllPointsReached) ReturnToLevelSelection();
-    }
+        // ? lucy code
+        //if (AllPointsReached) ReturnToLevelSelection();
+        // ? ---
+
+        // ! Show score and return to level selection after pressing button
+        if (AllPointsReached) ShowScore();
+    } 
 
     public float GetScore()
     {
@@ -69,6 +76,12 @@ public class OutlineManager : MonoBehaviour
         Debug.Log("Score: " + score);
 
         return score;
+    }
+
+    public void ShowScore()
+    {
+        scoreUI.gameObject.SetActive(true);
+        scoreTMP.text = $"Score: {GetScore()}";
     }
 
     public void AddFootStep(Vector2 point)
