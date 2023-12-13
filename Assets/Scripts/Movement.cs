@@ -44,14 +44,12 @@ public class Movement : MonoBehaviour
     {
         movementInput = context.ReadValue<Vector2>();
         isMoving = true;
-        //SoundManager.Instance.PlaySFX("Footsteps");
     }
 
     private void Move()
     {
         Vector3 movementVector = new Vector3(movementInput.x, movementInput.y, 0);
         transform.position += movementVector * spd * Time.deltaTime;
-        //SoundManager.Instance.PlaySFX("Footsteps");
     }
 
     private void InstantiateFootprint()

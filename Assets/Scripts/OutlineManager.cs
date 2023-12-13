@@ -58,6 +58,7 @@ public class OutlineManager : MonoBehaviour
         //  int notReachedPoints * ;
 
         int notReachedPoints = points.Count - _pointDistances.Count;
+        //int notReachedPointsMultiplier = notReachedPoints * 2;
 
         if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 2; }
 
@@ -65,9 +66,8 @@ public class OutlineManager : MonoBehaviour
         float maxAccuracy = 2f;
 
         float score = Mathf.Clamp01(1f - TotalAccuracy / maxAccuracy) * maxScore - notReachedPoints;
-        if (score <= 0f) { score = 0f; }
-        Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {notReachedPoints}, Score. {score}");
-
+        Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {notReachedPoints}");
+        Debug.Log("Score: " + score);
 
         return score;
     }
