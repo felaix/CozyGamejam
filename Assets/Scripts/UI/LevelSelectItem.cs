@@ -61,13 +61,6 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             GameManager.Instance.LoadLevel(data);
         });
-
-        _resetBtn.onClick.RemoveAllListeners();
-        _resetBtn.onClick.AddListener(() =>
-        {
-            CallbackManager.Instance.OnLevelReset?.Invoke(data);
-        });
-        */
     }
 
     public void OnPointerEnter(PointerEventData eventData)
