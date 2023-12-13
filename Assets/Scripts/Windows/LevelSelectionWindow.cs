@@ -16,6 +16,8 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
     private Button _nextPageBtn;
     [SerializeField]
     private Button _lastPageBtn;
+    [SerializeField]
+    private Button _quitBtn;
 
     [SerializeField]
     private GameObject _buttonPrefab;
@@ -67,6 +69,12 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
         _lastPageBtn.onClick.AddListener(() =>
         {
             if (CanShowLastPage) ChangePage(false);
+        });
+
+        _quitBtn.onClick.RemoveAllListeners();
+        _quitBtn.onClick.AddListener(() =>
+        {
+            GameManager.Instance.QuitGame();
         });
     }
 

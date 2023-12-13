@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f745f5ff5964b45aacb15e5b41e8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _eventSystemRef: {fileID: 1271458437062695509, guid: e1fb1e9fda763d74cbb0fe866c6eec04, type: 3}
   _startBtn: {fileID: 2174484048902623013}
   _quitBtn: {fileID: 5693680952965870849}
 --- !u!1 &4846016368121875775

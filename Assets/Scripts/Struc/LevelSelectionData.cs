@@ -25,7 +25,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     
     protected override void Awake()
     {
-        base.Awake();
+        if (LevelSelectionData.Instance != null && LevelSelectionData.Instance != this) Destroy(LevelSelectionData.Instance.gameObject);
         DontDestroyOnLoad(this);
         CurTierIndex = -1;
 

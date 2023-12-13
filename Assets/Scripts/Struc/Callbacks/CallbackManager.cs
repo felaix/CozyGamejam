@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CallbackManager : Singleton<CallbackManager>
@@ -16,7 +17,10 @@ public class CallbackManager : Singleton<CallbackManager>
 
     protected override void Awake()
     {
-        base.Awake();
+        if (CallbackManager.Instance != null && CallbackManager.Instance != this)
+        {
+            DestroyImmediate(CallbackManager.Instance.gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
 }

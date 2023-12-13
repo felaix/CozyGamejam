@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -17,7 +18,12 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Awake()
     {
-        base.Awake();
+        if (GameManager.Instance != null && GameManager.Instance != this)
+        {
+            DestroyImmediate(GameManager.Instance.gameObject);
+            //  return;
+        }
+
         DontDestroyOnLoad(gameObject);
         SetFrameRate(_frameRate);
 

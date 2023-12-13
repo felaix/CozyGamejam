@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MainMenuController : SingletonWindow<MainMenuController>
 {
+    [SerializeField]
+    private GameObject _eventSystemRef;
+    private EventSystem _curSystem => EventSystem.current;
     //  --- REFERENCES ---
     private GameManager GameManager => GameManager.Instance;
     private CallbackManager Callbacks => CallbackManager.Instance;
@@ -20,12 +24,22 @@ public class MainMenuController : SingletonWindow<MainMenuController>
     protected override void Awake()
     {
         base.Awake();
-        Callbacks.OnLoadMainMenu += ShowWindow;
+
+        if (_curSystem == null) Instantiate(_eventSystemRef);
+
+        //  NullCheck();
+
+        base.ShowWindow();
+        SetButtons();
+
+        //  Callbacks.OnLoadMainMenu += ShowWindow;
     }
 
     public override void ShowWindow()
     {
-        NullCheck();
+        if (_curSystem == null) Instantiate(_eventSystemRef);
+
+        //  NullCheck();
 
         base.ShowWindow();
         SetButtons();
@@ -34,6 +48,7 @@ public class MainMenuController : SingletonWindow<MainMenuController>
     private void NullCheck()
     {
         if (_startBtn == null || _quitBtn == null) Debug.LogError("ERROR : MainMenu Buttons not set!"); return;
+        
     }
 
     private void SetButtons()
