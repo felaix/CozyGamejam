@@ -18,7 +18,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
 
     public Dictionary<int, LevelData> LevelDatas = new();
     public int CurLevelIndex = 0; // set on level load
-    public int TotalScore;
+    public float TotalScore;
 
     //  --- CONDITIONS ---
     private bool PlayedLevelBefore(LevelData data) => data.AvailablePoints.Count > 0;

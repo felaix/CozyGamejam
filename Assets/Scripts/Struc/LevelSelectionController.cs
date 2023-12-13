@@ -1,10 +1,12 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class LevelSelectionController : MonoBehaviour
+public class LevelSelectionController : Singleton<LevelSelectionController>
 {
     //  --- REFERENCES ---
     private CallbackManager _callbacks => CallbackManager.Instance;
@@ -16,18 +18,20 @@ public class LevelSelectionController : MonoBehaviour
     private GameObject _selectionObj;
     private LevelSelectionData _selectionData;
 
+
     private float _totalScore;
 
-    //  level kann jederzeit beendet werden, bei 100% progress wird level automatisch abgeschlossen
-    //  die erreichten punkte werden pro level zwischengespeichert, daraus resultiert ne punktzahl
-    //  ne bestimmte punktzahl wird benötigt, um weitere  "level" freizuschalten
-    //  man kann level wieder besuchen, um da weiterzumachen, wo man aufgehört hat
-    //  buttons: start level & reset level
+    public void UpdatePage(bool next) { if (next) ActivePage++; else ActivePage--; }
+    public int ActivePage { get; private set; } = 1;
+    public int LastPage => _selectionData.ActiveLevelDatas.Count / 3;
+    public bool IsFirstPage => ActivePage == 1;
+    public bool IsLastPage => ActivePage == LastPage;
+    public bool HasLessPages => ActivePage > 1;
+    public bool HasMorePages => LastPage > ActivePage;
 
-    //  => popup und neue levels darstellen
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _callbacks.OnLevelReset += ResetLevel;
         NullCheck();
     }
@@ -79,48 +83,77 @@ public class LevelSelectionController : MonoBehaviour
         ResetTotalScore();
         CalculateTotalScore();
 
-        if (CanUnlockNextTier())
-        {
-            int nextTier = _selectionData.CurTierIndex + 1;
-
-            List<ScriptableImage> levels = _selectionData.AvailableTiers[nextTier].ImageData;
-
-            //  for each image data in next tier
-            for (int i = 0; i < levels.Count; i++)
-            {
-                //  create levelData
-                LevelData newData = new();
-                newData.AddImage(levels[i].Image);
-                newData.AddIndex(levels[i].ID);
-                //  add levelData to dictionary
-                _selectionData.LevelDatas.Add(newData.Index, newData);
-                _selectionData.AddToLevelList(newData);
-                _selectionData.CurTierIndex = nextTier;
-            }
-        }
-
+        if (CanUnlockNextTier()) PrepareNewLevels();
         LoadLevelImages();
     }
 
-    public bool IsFirstTier => _selectionData.CurTierIndex == -1;
-    public bool ReachedUnlockScore => _totalScore >= NextTierUnlockScore;
-    public bool CanUnlockNextTier() => IsFirstTier || ReachedUnlockScore;
+    public void PrepareNewLevels()
+    {
+        Levels = _selectionData.AvailableTiers[_selectionData.NextTierIndex].ImageData;
+        for (int i = 0; i < Levels.Count; i++) UpdateDataReferences(LevelData(Levels[i]));
+        _selectionData.CurTierIndex = _selectionData.NextTierIndex;
+    }
 
-    public int NextTierUnlockScore => _selectionData.AvailableTiers[_selectionData.NextTierIndex].UnlockScore;
-    public float LevelScore(int index) => LevelData(index).Score;
-    public float UpdateTotalScore(int index) => _totalScore += LevelScore(index);
-    public int ActiveLevelsCount => _selectionData.ActiveLevelDatas.Count;
+    private List<ScriptableImage> Levels;
+    private LevelData LevelData(ScriptableImage img) => GetCreatedLevelData(img);
+    private LevelData GetCreatedLevelData(ScriptableImage img)
+    {
+        LevelData newData = new();
+        newData.AddImage(img.Image);
+        newData.AddIndex(img.ID);
+        return newData;
+    }
 
-    public LevelData LevelData(int index) => _selectionData.ActiveLevelDatas[index];
+    private void UpdateDataReferences(LevelData newData)
+    {
+        _selectionData.LevelDatas.Add(newData.Index, newData);
+        _selectionData.AddToLevelList(newData);
+    }
 
-    public void ResetTotalScore() => _totalScore = 0;
-    public void CalculateTotalScore() { for (int i = 0; i < ActiveLevelsCount; i++) UpdateTotalScore(i); }
-
-    private void LoadLevelImages()
+    public void LoadLevelImages()
     {
         GameObject selectionUI = Instantiate(_uiToSpawn);
         LevelSelectionWindow ui = selectionUI.GetComponent<LevelSelectionWindow>();
-        ui.Levels = _selectionData.ActiveLevelDatas;
+
+        ui.Levels = GetPageLevels();
         ui.ShowWindow();
     }
+
+    public List<LevelData> GetPageLevels()
+    {
+        List<LevelData> toReturn = new();
+        int first = 0;
+        int last = 0;
+
+        if (ActivePage == 1) { first = 0; last = 2; }
+        else if (ActivePage == 2) { first = 3; last = 5; }
+        else if (ActivePage == 3) { first = 6; last = 8; }
+
+        for (int i = first; i <= last; i++)
+        {
+            toReturn.Add(_selectionData.ActiveLevelDatas[i]);
+        }
+        return toReturn;
+    }
+
+    public bool IsFirstTier => _selectionData.CurTierIndex == -1;
+    public bool ReachedUnlockScore => _selectionData.TotalScore >= NextTierUnlockScore();
+    public bool CanUnlockNextTier()
+    {
+        return IsFirstTier || ReachedUnlockScore;
+    }
+
+    public int NextTierUnlockScore()
+    {
+        return _selectionData.AvailableTiers[_selectionData.NextTierIndex].UnlockScore;
+    }
+    public int ActiveLevelsCount => _selectionData.ActiveLevelDatas.Count;
+
+    public float LevelScore(int index) => LevelData(index).Score;
+    public float UpdateTotalScore(int index) => _selectionData.TotalScore += LevelScore(index);
+
+    public LevelData LevelData(int index) => _selectionData.ActiveLevelDatas[index];
+
+    public void ResetTotalScore() => _selectionData.TotalScore = 0;
+    public void CalculateTotalScore() { for (int i = 0; i < ActiveLevelsCount; i++) UpdateTotalScore(i); }
 }
