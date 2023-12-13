@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelSelectionController : MonoBehaviour
@@ -14,8 +15,8 @@ public class LevelSelectionController : MonoBehaviour
     [SerializeField]
     private GameObject _selectionObj;
     private LevelSelectionData _selectionData;
-    
-    private Dictionary<int, LevelData> _levelDatas = new();
+
+    private float _totalScore;
 
     //  level kann jederzeit beendet werden, bei 100% progress wird level automatisch abgeschlossen
     //  die erreichten punkte werden pro level zwischengespeichert, daraus resultiert ne punktzahl
@@ -37,7 +38,7 @@ public class LevelSelectionController : MonoBehaviour
         data.Score = 0;
     }
 
-    private void Start()    { LoadLevelSelection(); }
+    private void Start() { LoadLevelSelection(); }
 
 
     //  --- PREPARATION ---
@@ -65,17 +66,19 @@ public class LevelSelectionController : MonoBehaviour
         {
             GameObject obj = Instantiate(_selectionObj);
             _selectionData = obj.GetComponent<LevelSelectionData>();
-        }else
+        }
+        else
         {
             _selectionData = LevelSelectionData.Instance;
         }
     }
 
-
-
     //  --- SCRIPT METHODS ---
     private void LoadLevelSelection()
     {
+        ResetTotalScore();
+        CalculateTotalScore();
+
         if (CanUnlockNextTier())
         {
             int nextTier = _selectionData.CurTierIndex + 1;
@@ -99,30 +102,19 @@ public class LevelSelectionController : MonoBehaviour
         LoadLevelImages();
     }
 
-    private bool CanUnlockNextTier()
-    {
-        if (_selectionData.CurTierIndex == -1) return true;
-        else if (GetActiveLevelScore() >= GetNextTierScore()) return true;
-        return false;
-    }
+    public bool IsFirstTier => _selectionData.CurTierIndex == -1;
+    public bool ReachedUnlockScore => _totalScore >= NextTierUnlockScore;
+    public bool CanUnlockNextTier() => IsFirstTier || ReachedUnlockScore;
 
-    private int GetNextTierScore()
-    {
-        int nextTier = _selectionData.CurTierIndex++;
-        return _selectionData.AvailableTiers[nextTier].UnlockScore;
-    }
+    public int NextTierUnlockScore => _selectionData.AvailableTiers[_selectionData.NextTierIndex].UnlockScore;
+    public float LevelScore(int index) => LevelData(index).Score;
+    public float UpdateTotalScore(int index) => _totalScore += LevelScore(index);
+    public int ActiveLevelsCount => _selectionData.ActiveLevelDatas.Count;
 
-    private int GetActiveLevelScore()
-    {
-        int activeLevelScore = 0;
+    public LevelData LevelData(int index) => _selectionData.ActiveLevelDatas[index];
 
-        for (int i = 0; i < _selectionData.ActiveLevelDatas.Count; i++)
-        {
-            activeLevelScore += (int)_selectionData.ActiveLevelDatas[i].Score;
-        }
-
-        return activeLevelScore;
-    }
+    public void ResetTotalScore() => _totalScore = 0;
+    public void CalculateTotalScore() { for (int i = 0; i < ActiveLevelsCount; i++) UpdateTotalScore(i); }
 
     private void LoadLevelImages()
     {

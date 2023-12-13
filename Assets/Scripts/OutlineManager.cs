@@ -52,7 +52,6 @@ public class OutlineManager : MonoBehaviour
 
     public float GetScore()
     {
-        Debug.Log($"Total Distance: {TotalDistance}, Total Accuracy: {TotalAccuracy}");
         //  differenz zwischen _pointDistances.count und points.count
         //  => negativ berücksichtigen, dafür sollte ne schlechte akkuratheit genutzt werden
         //  int notReachedPoints * ;
