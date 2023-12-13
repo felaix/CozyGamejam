@@ -12,5 +12,11 @@ public class Footsteps : MonoBehaviour
     private void Start()
     {
         OutlineManager.Instance.AddFootStep(transform.position);
+        Invoke(nameof(DestroyFootstep), 1f);
+    }
+
+    private void DestroyFootstep()
+    {
+        Destroy(this.gameObject);
     }
 }

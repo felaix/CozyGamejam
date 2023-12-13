@@ -132,7 +132,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054190833514625970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -477,8 +477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ImageObj: {fileID: 2882960377740927909}
   _levelBtn: {fileID: 3982476325662778218}
-  _startBtn: {fileID: 0}
-  _resetBtn: {fileID: 0}
   _animDuration: 0.5
   _bgHovered: {fileID: 5109272353456969558}
   _bgUnhovered: {fileID: 6680852205355115120}
