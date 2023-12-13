@@ -17,7 +17,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        // ! Play Music
+        // ! Play Music#
+        PlayMusic("StandardMusic");
     }
 
     public void PlayMusic(string name)

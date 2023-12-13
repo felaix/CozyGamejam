@@ -342,13 +342,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: -3.5, z: -10}
+  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
+  m_LocalPosition: {x: 0, y: -5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5501650477544348060}
   smoothSpd: 0.125
-  offset: {x: 0, y: -3.5, z: 0}
+  offset: {x: 0, y: -6.5, z: 0}
 --- !u!1 &603915613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +1137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSounds:
   - name: StandardMusic
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: c3829e3acd3f79446baa7d7535cd4f4f, type: 3}
   sfxSounds:
   - name: Footsteps
     clips:

@@ -119,7 +119,7 @@ MonoBehaviour:
   _scoreBtn: {fileID: 8692933415430184891}
   _nextPageBtn: {fileID: 8555341200945352549}
   _lastPageBtn: {fileID: 6675922382198649689}
-  _quitBtn: {fileID: 0}
+  _quitBtn: {fileID: 8126358006656283501}
   _buttonPrefab: {fileID: 6114080149455070440, guid: 69599c2d7ddf7634080ca867e7847020, type: 3}
   _levelsObj: {fileID: 6132808913782078267}
 --- !u!1 &1961004590778420358

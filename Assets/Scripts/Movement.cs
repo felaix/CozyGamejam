@@ -37,6 +37,8 @@ public class Movement : MonoBehaviour
     {
         movementInput = Vector2.zero;
         isMoving = false;
+        UpdateAnimator();
+
     }
 
     private void OnDisable()
@@ -49,42 +51,22 @@ public class Movement : MonoBehaviour
     {
         movementInput = context.ReadValue<Vector2>();
         isMoving = true;
+        UpdateAnimator();
+
     }
 
     private void Move()
     {
         Vector3 movementVector = new Vector3(movementInput.x, movementInput.y, 0);
-        transform.position += movementVector * spd * Time.deltaTime;
-
-        //if (GetIsWalkingHorizontal()) { }
-        if (!isMoving) { animator.SetBool("Idle", true); Debug.Log("Idle"); return; }
-        else
-        {
-            animator.SetBool("Idle", false);
-            animator.SetFloat("Horizontal", movementInput.x);
-            animator.SetFloat("Vertical", movementInput.y);
-        }
-
-        //animator.SetBool("Horizontal", GetIsWalkingHorizontal());
-        //animator.SetInteger("Direction", GetDirection(GetIsWalkingHorizontal()));
-        //animator.SetBool("Idle", false);
-        //GetDirection(GetIsWalkingHorizontal());
-
+        transform.position += movementVector.normalized * spd * Time.deltaTime;
     }
 
-    //private bool GetIsWalkingHorizontal() { return (Mathf.Abs(movementInput.x) > Mathf.Abs(movementInput.y)); }
-
-    //private int GetDirection(bool horizontal) { Debug.Log(horizontal + "movementInputY: " + (int)movementInput.y + "," + "movementInputX: " + (int)movementInput.x); return horizontal ? (int)movementInput.y : (int)movementInput.x; }
-
-
-
-    ////{
-    ////    Debug.Log("Movement Input Y: " + movementInput.y + "Movement Input X: " + movementInput.x);
-    ////    if (horizontal) { Debug.Log("walk left/right"); return movementInput.y > 0 ? 1 : -1; } // 1 for right, -1 for left
-
-    ////    else { Debug.Log("walk up/down"); return movementInput.x > 0 ? 1 : -1; }// 1 for up, -1 for down
-
-    ////}
+    private void UpdateAnimator()
+    {
+        animator.SetBool("Idle", !isMoving);
+        animator.SetFloat("Horizontal", movementInput.x);
+        animator.SetFloat("Vertical", movementInput.y);
+    }
 
     private void InstantiateFootprint()
     {
@@ -97,7 +79,6 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        
 
         timer += Time.deltaTime;
 
@@ -113,17 +94,7 @@ public class Movement : MonoBehaviour
 
     //private void FixedUpdate()
     //{
-    //    bool horizontal = GetIsWalkingHorizontal();
-    //    GetDirection(horizontal);
-
-    //    if (horizontal)
-    //    {
-    //        if (movementInput.x == 1) { animator.Play("Player_walkleft"); Debug.Log("walk left"); } else Debug.Log("walk right"); animator.Play("Player_walkright");
-    //    }
-    //    else
-    //    {
-    //        if (movementInput.y == 1) { animator.Play("Player_walkup"); Debug.Log("walk up"); } else Debug.Log("walk down"); animator.Play("Player_walkdown");
-    //    }
+    //    UpdateAnimator();
     //}
 
 
