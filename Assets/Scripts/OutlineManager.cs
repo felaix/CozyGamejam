@@ -132,4 +132,10 @@ public class OutlineManager : MonoBehaviour
     private float GetShortestDistance(float lastDis, float newDis) => Mathf.Min(lastDis, newDis);
 
     public int NotReachedPoints => (_totalPoints.Count - _pointDistances.Count) * 2;
+
+    //  used by returnButton
+    public void ReturnToLevelSelection()
+    {
+        LevelController.Instance.FinishLevel(_totalPoints, GetScore());
+    }
 }
