@@ -62,7 +62,11 @@ public class OutlineManager : MonoBehaviour
         }
 
         // ! Show score and return to level selection after pressing button
-        if (AllPointsReached) ShowScore();
+        if (AllPointsReached)
+        {
+            SoundManager.Instance.PlaySFX("Completed");
+            ShowScore();
+        }
     }
 
     private float GetPlayerPointDistance(Collider2D col, Vector2 playerPos)
