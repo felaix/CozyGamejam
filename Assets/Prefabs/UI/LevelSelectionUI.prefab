@@ -894,6 +894,7 @@ GameObject:
   - component: {fileID: 5315094891368444506}
   - component: {fileID: 8847601058021732147}
   - component: {fileID: 8126358006656283501}
+  - component: {fileID: 6857979828007817492}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -1003,6 +1004,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6857979828007817492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3937589752705802884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Snow
+  clicked: Click_Snow
+  selected: Hover_Snow
 --- !u!1 &4948594374355755453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1165,7 @@ GameObject:
   - component: {fileID: 8021825205158048462}
   - component: {fileID: 7573491142879282672}
   - component: {fileID: 8555341200945352549}
+  - component: {fileID: 1998351310423466252}
   m_Layer: 5
   m_Name: NextPageButton
   m_TagString: Untagged
@@ -1258,6 +1275,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1998351310423466252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070275349891415982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Snow
+  clicked: Slide
+  selected: Hover_Snow
 --- !u!1 &6132808913782078267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1477,7 @@ GameObject:
   - component: {fileID: 5441347598403838349}
   - component: {fileID: 2902122405106787408}
   - component: {fileID: 6675922382198649689}
+  - component: {fileID: 7013046460655495876}
   m_Layer: 5
   m_Name: LastPageButton
   m_TagString: Untagged
@@ -1554,6 +1587,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7013046460655495876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8943064223801557945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Snow
+  clicked: Slide
+  selected: Hover_Snow
 --- !u!1 &9070733017348302822
 GameObject:
   m_ObjectHideFlags: 0

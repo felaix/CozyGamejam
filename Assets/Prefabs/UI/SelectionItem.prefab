@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 4459280975903892692}
   - component: {fileID: 3982476325662778218}
   - component: {fileID: 5414758471074837986}
+  - component: {fileID: 1676797692899876112}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -212,6 +213,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b10dcd2d77662946998ef3dd761a753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1676797692899876112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054190833514625970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Wood
+  clicked: Click_Wood
+  selected: Hover_Wood
 --- !u!1 &2882960377740927909
 GameObject:
   m_ObjectHideFlags: 0
