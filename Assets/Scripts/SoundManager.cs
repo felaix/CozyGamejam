@@ -6,8 +6,10 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource;
+    public Sound[] musicSounds, sfxSounds, atmosphereSounds;
+    public AudioSource musicSource, sfxSource, atmosphereSource;
+
+    private int lastIndex;
 
     private void Awake()
     {
@@ -18,16 +20,25 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         // ! Play Music#
+        PlayAtmosphere("atmo");
         PlayMusic("StandardMusic");
     }
 
     public void PlayMusic(string name)
     {
         Sound s = Array.Find(musicSounds, x => x.name == name);
-
         if (s == null) { Debug.Log($"Music {name} not found "); return; }
 
-        else { musicSource.clip = s.clips[GetRandomIndex(s.clips.Length)]; musicSource.Play(); }
+        int randomIndex = GetRandomIndex(s.clips.Length);
+
+        while (GetIsLastIndex(randomIndex))
+        {
+            randomIndex = GetRandomIndex(s.clips.Length);
+        }
+
+        musicSource.clip = s.clips[randomIndex];
+        musicSource.Play(); 
+        StoreIndex(randomIndex);
     }
 
     public void PlaySFX(string name)
@@ -41,6 +52,13 @@ public class SoundManager : MonoBehaviour
         sfxSource.PlayOneShot(s.clips[GetRandomIndex(s.clips.Length)]);
     }
 
+    public void PlayAtmosphere(string name)
+    {
+        Sound s = Array.Find(atmosphereSounds, x => x.name == name);
+        if (s == null) { Debug.LogError($"Atmo {name} not found"); return; }
+        else { atmosphereSource.clip = s.clips[GetRandomIndex(s.clips.Length)]; atmosphereSource.Play(); }
+    }
+
     public int GetRandomIndex(int length)
     {
         int randomIndex = UnityEngine.Random.Range(0, length);
@@ -50,6 +68,7 @@ public class SoundManager : MonoBehaviour
     public void ModifyMusicVolume(Slider slider)
     {
         musicSource.volume = slider.value;
+        atmosphereSource.volume = slider.value;
     }
 
     public void ModifySFXVolume(Slider slider)
@@ -61,6 +80,10 @@ public class SoundManager : MonoBehaviour
     {
         AudioListener.volume = slider.value;
     }
+
+    private void StoreIndex(int index) { lastIndex = index; }
+
+    private bool GetIsLastIndex(int index) { if (index == lastIndex) return true; else return false; }
 }
 
 [System.Serializable]

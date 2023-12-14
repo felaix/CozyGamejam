@@ -37,6 +37,7 @@ public class Movement : MonoBehaviour
     {
         movementInput = Vector2.zero;
         isMoving = false;
+        Debug.Log("stopped moving");
         UpdateAnimator();
 
     }
@@ -51,6 +52,7 @@ public class Movement : MonoBehaviour
     {
         movementInput = context.ReadValue<Vector2>();
         isMoving = true;
+        Debug.Log("is moving");
         UpdateAnimator();
 
     }
@@ -59,13 +61,17 @@ public class Movement : MonoBehaviour
     {
         Vector3 movementVector = new Vector3(movementInput.x, movementInput.y, 0);
         transform.position += movementVector.normalized * spd * Time.deltaTime;
+        //UpdateAnimator();
+
     }
 
     private void UpdateAnimator()
     {
-        animator.SetBool("Idle", !isMoving);
+        Debug.Log("idle: " + !isMoving);
+
         animator.SetFloat("Horizontal", movementInput.x);
         animator.SetFloat("Vertical", movementInput.y);
+        animator.SetBool("Idle", !isMoving);
     }
 
     private void InstantiateFootprint()
