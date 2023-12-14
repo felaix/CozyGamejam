@@ -30,6 +30,8 @@ public class OutlineManager : MonoBehaviour
     private float _minRange;
     private float _notReachedDistance = 1f;
 
+    private LevelController _levelController;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -37,6 +39,7 @@ public class OutlineManager : MonoBehaviour
 
     private void Start()
     {
+        _levelController = LevelController.Instance;
         SoundManager.Instance.PlayMusic("StandardMusic");
     }
 
@@ -88,6 +91,8 @@ public class OutlineManager : MonoBehaviour
 
         if (score < 0f) score = 0f;
         if (score > 100f) score = 100f;
+
+        if (score < _levelController.LastScore) score = _levelController.LastScore;
 
         return score;
     }

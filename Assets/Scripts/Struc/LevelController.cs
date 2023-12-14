@@ -6,7 +6,7 @@ public class LevelController : Singleton<LevelController>
 {
     public Sprite ImageToCode { get; private set; }
     public Sprite ImageToDisplay { get; private set; }
-    public float Accuracy { get; private set; }
+    public float LastScore { get; private set; }
 
     //  --- REFERENCES ---
     private GameManager _gameManager => GameManager.Instance;
@@ -60,7 +60,7 @@ public class LevelController : Singleton<LevelController>
         if (_selectionDatas.CurLevelData.ImageToCode == null) Debug.LogError($"TO FIX: level data has no image");
         ImageToCode = _selectionDatas.CurLevelData.ImageToCode;
         ImageToDisplay = _selectionDatas.CurLevelData.ImageToDisplay;
-        Accuracy = _selectionDatas.CurLevelData.Score;
+        LastScore = _selectionDatas.CurLevelData.Score;
     }
 
     //  called, when: player presses button to leave
