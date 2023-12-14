@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class LevelController : Singleton<LevelController>
 {
-    public Sprite CurImageToCode { get; private set; }
-    public Sprite CurImageToDisplay { get; private set; }
+    public Sprite ImageToCode { get; private set; }
+    public Sprite ImageToDisplay { get; private set; }
     public float Accuracy { get; private set; }
 
     //  --- REFERENCES ---
@@ -58,8 +58,8 @@ public class LevelController : Singleton<LevelController>
     private void DEBUGStartScene()
     {
         if (_selectionDatas.CurLevelData.ImageToCode == null) Debug.LogError($"TO FIX: level data has no image");
-        CurImageToCode = _selectionDatas.CurLevelData.ImageToCode;
-        CurImageToDisplay = _selectionDatas.CurLevelData.ImageToDisplay;
+        ImageToCode = _selectionDatas.CurLevelData.ImageToCode;
+        ImageToDisplay = _selectionDatas.CurLevelData.ImageToDisplay;
         Accuracy = _selectionDatas.CurLevelData.Score;
     }
 

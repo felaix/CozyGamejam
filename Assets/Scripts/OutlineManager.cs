@@ -16,7 +16,7 @@ public class OutlineManager : MonoBehaviour
     [SerializeField] private int sampleRate;
 
     [SerializeField] private List<Vector2> footpoints;
-    [SerializeField] private List<Vector2> points;
+    [SerializeField] private List<Vector2> _totalPoints;
 
     [SerializeField] private GameObject scoreUI;
     [SerializeField] private TMP_Text scoreTMP;
@@ -71,11 +71,11 @@ public class OutlineManager : MonoBehaviour
         //  => negativ berücksichtigen, dafür sollte ne schlechte akkuratheit genutzt werden
         //  int notReachedPoints * ;
 
-        int notReachedPoints = (points.Count - _pointDistances.Count) * 2;
-        int penaltyForTooManyFootsteps = (points.Count - footpoints.Count) * 2;
+        int notReachedPoints = (_totalPoints.Count - _pointDistances.Count) * 2;
+        int penaltyForTooManyFootsteps = (_totalPoints.Count - footpoints.Count) * 2;
 
 
-        if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 3; }
+        if (notReachedPoints > _totalPoints.Count / 2) { notReachedPoints = notReachedPoints * 3; }
 
         int penalty = Mathf.Abs(notReachedPoints + penaltyForTooManyFootsteps);
         if (penalty > 30) penalty = 30;
@@ -104,19 +104,19 @@ public class OutlineManager : MonoBehaviour
         footpoints.Add(point);
     }
 
-    public void ResetPoints() => points.Clear();
+    public void ResetPoints() => _totalPoints.Clear();
     public void ResetFootSteps() => footpoints.Clear();
-    public void AddPoint(Vector2 point) => points.Add(point);
+    public void AddPoint(Vector2 point) => _totalPoints.Add(point);
 
     private void AddPointAsEntry(Collider2D col, float distance) => _pointDistances.Add(col, distance);
 
 
-    public bool AllPointsReached => _pointDistances.Count >= points.Count;
+    public bool AllPointsReached => _pointDistances.Count >= _totalPoints.Count;
     public bool IsFirstVisit(Collider2D col) => !_pointDistances.ContainsKey(col);
 
 
     public float TotalDistance => _pointDistances.Values.Sum();
-    public float TotalAccuracy => TotalDistance / points.Count;
+    public float TotalAccuracy => TotalDistance / _totalPoints.Count;
 
     private float GetDistance(Collider2D col, Vector2 playerPos) => Vector2.Distance(col.transform.position, playerPos);
     private float GetLastDistance(Collider2D col) => _pointDistances.GetValueOrDefault(col);
@@ -124,6 +124,6 @@ public class OutlineManager : MonoBehaviour
 
     public void ReturnToLevelSelection()
     {
-        LevelController.Instance.FinishLevel(points, GetScore());
+        LevelController.Instance.FinishLevel(_totalPoints, GetScore());
     }
 }
