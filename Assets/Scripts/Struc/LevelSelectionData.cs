@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LevelSelectionData : Singleton<LevelSelectionData>
 {
+    public bool HasSeenTutorial = false;
     public LevelData CurLevelData => LevelDatas[CurLevelIndex];
 
     public List<ScriptableTier> AvailableTiers => _availableTiers;
