@@ -71,7 +71,7 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
         ResetTotalScore();
         CalculateTotalScore();
 
-        if (CanUnlockNextTier()) PrepareNewLevels();
+        if (CanUnlockNextTier) PrepareNewLevels();
         LoadLevelImages();
     }
 
@@ -126,16 +126,10 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
     }
 
     public bool IsFirstTier => _selectionData.CurTierIndex == -1;
-    public bool ReachedUnlockScore => _selectionData.TotalScore >= NextTierUnlockScore();
-    public bool CanUnlockNextTier()
-    {
-        return IsFirstTier || ReachedUnlockScore;
-    }
+    public bool ReachedUnlockScore => _selectionData.TotalScore >= NextTierUnlockScore;
+    public bool CanUnlockNextTier => _selectionData.HasNextTierInRange && (IsFirstTier || ReachedUnlockScore);
 
-    public int NextTierUnlockScore()
-    {
-        return _selectionData.AvailableTiers[_selectionData.NextTierIndex].UnlockScore;
-    }
+    public int NextTierUnlockScore => _selectionData.AvailableTiers[_selectionData.NextTierIndex].UnlockScore;
     public int ActiveLevelsCount => _selectionData.ActiveLevelDatas.Count;
 
     public float LevelScore(int index) => LevelData(index).Score;

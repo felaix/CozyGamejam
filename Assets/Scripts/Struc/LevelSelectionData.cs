@@ -8,6 +8,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
     public bool HasSeenTutorial = false;
     public LevelData CurLevelData => LevelDatas[CurLevelIndex];
 
+    public bool HasNextTierInRange => NextTierIndex < AvailableTiers.Count;
     public List<ScriptableTier> AvailableTiers => _availableTiers;
     [SerializeField]
     private List<ScriptableTier> _availableTiers = new();
