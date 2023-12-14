@@ -56,6 +56,11 @@ public class SoundManager : MonoBehaviour
     {
         sfxSource.volume = slider.value;
     }
+
+    public void ModifyMasterVolume(Slider slider)
+    {
+        AudioListener.volume = slider.value;
+    }
 }
 
 [System.Serializable]
