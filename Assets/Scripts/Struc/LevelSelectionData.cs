@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelSelectionData : Singleton<LevelSelectionData>
 {
     public bool HasSeenTutorial = false;
-    public LevelData CurLevelData => LevelDatas[CurLevelIndex];
+    public LevelData CurrentLevelData => LevelDatas[CurLevelIndex];
 
     public bool HasNextTierInRange => NextTierIndex < AvailableTiers.Count;
     public List<ScriptableTier> AvailableTiers => _availableTiers;
@@ -42,14 +42,15 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
 
     private void UpdateLevelData(List<Transform> totalPoints, float accuracy)
     {
-        if (!PlayedLevelBefore(CurLevelData)) CurLevelData.AddAvailablePoints(totalPoints);
-        CurLevelData.UpdateReachedPoints(accuracy);
+        if (!PlayedLevelBefore(CurrentLevelData)) CurrentLevelData.AddAvailablePoints(totalPoints);
+        CurrentLevelData.UpdateReachedPoints(accuracy);
     }
 
     private void ResetLevel(LevelData data)
     {
         Debug.Log("RESET LEVEL");
         data.Score = 0;
+        GameManager.Instance.LoadLevel(data);
     }
 }
 

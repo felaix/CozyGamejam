@@ -57,10 +57,10 @@ public class LevelController : Singleton<LevelController>
     //  called in each script, that needs to be loaded at levelStart
     private void DEBUGStartScene()
     {
-        if (_selectionDatas.CurLevelData.ImageToCode == null) Debug.LogError($"TO FIX: level data has no image");
-        ImageToCode = _selectionDatas.CurLevelData.ImageToCode;
-        ImageToDisplay = _selectionDatas.CurLevelData.ImageToDisplay;
-        LastScore = _selectionDatas.CurLevelData.Score;
+        if (_selectionDatas.CurrentLevelData.ImageToCode == null) Debug.LogError($"TO FIX: level data has no image");
+        ImageToCode = _selectionDatas.CurrentLevelData.ImageToCode;
+        ImageToDisplay = _selectionDatas.CurrentLevelData.ImageToDisplay;
+        LastScore = _selectionDatas.CurrentLevelData.Score;
     }
 
     //  called, when: player presses button to leave

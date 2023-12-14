@@ -492,19 +492,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 243329543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 603915614}
-        m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
-        m_MethodName: ReturnToLevelSelection
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &243329543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3079,6 +3067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorial: {fileID: 1383990973}
+  _resetBtn: {fileID: 243329542}
 --- !u!1 &1660139722
 GameObject:
   m_ObjectHideFlags: 0
