@@ -16,8 +16,15 @@ public class MainMenuController : SingletonWindow<MainMenuController>
     [SerializeField]
     private Button _startBtn;
     [SerializeField]
+    private Button _settingsBtn;
+    [SerializeField]
     private Button _quitBtn;
-
+    [SerializeField]
+    private Button _closeSettingsBtn;
+    [SerializeField]
+    private GameObject _mainPanel;
+    [SerializeField]
+    private GameObject _settingsPanel;
 
     //  --- SCRIPT METHODS ---
 
@@ -26,29 +33,15 @@ public class MainMenuController : SingletonWindow<MainMenuController>
         base.Awake();
 
         if (_curSystem == null) Instantiate(_eventSystemRef);
-
-        //  NullCheck();
-
         base.ShowWindow();
         SetButtons();
-
-        //  Callbacks.OnLoadMainMenu += ShowWindow;
     }
 
     public override void ShowWindow()
     {
         if (_curSystem == null) Instantiate(_eventSystemRef);
-
-        //  NullCheck();
-
         base.ShowWindow();
         SetButtons();
-    }
-
-    private void NullCheck()
-    {
-        if (_startBtn == null || _quitBtn == null) Debug.LogError("ERROR : MainMenu Buttons not set!"); return;
-        
     }
 
     private void SetButtons()
@@ -59,10 +52,24 @@ public class MainMenuController : SingletonWindow<MainMenuController>
             GameManager.LoadScene(1);
         });
 
+        _settingsBtn.onClick.RemoveAllListeners();
+        _settingsBtn.onClick.AddListener(() =>
+        {
+            _mainPanel.SetActive(false);
+            _settingsPanel.SetActive(true);
+        });
+
         _quitBtn.onClick.RemoveAllListeners();
         _quitBtn.onClick.AddListener(() =>
         {
             GameManager.QuitGame();
+        });
+
+        _closeSettingsBtn.onClick.RemoveAllListeners();
+        _closeSettingsBtn.onClick.AddListener(() =>
+        {
+            _mainPanel.SetActive(true);
+            _settingsPanel.SetActive(false);
         });
     }
 }
