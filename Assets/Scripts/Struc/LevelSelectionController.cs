@@ -6,6 +6,8 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
     //  --- REFERENCES ---
     private CallbackManager _callbacks => CallbackManager.Instance;
     private GameManager _gameManager => GameManager.Instance;
+
+    private LevelSelectionWindow _levelSelectionUI;
     [SerializeField]
     private GameObject _uiToSpawn;
 
@@ -30,7 +32,7 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
         NullCheck();
     }
 
-    private void Start() { LoadLevelSelection(); }
+    private void Start() { InitializeLoevelSelection(); }
 
 
     //  --- PREPARATION ---
@@ -66,12 +68,13 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
     }
 
     //  --- SCRIPT METHODS ---
-    private void LoadLevelSelection()
+    private void InitializeLoevelSelection()
     {
         ResetTotalScore();
         CalculateTotalScore();
 
         if (CanUnlockNextTier) PrepareNewLevels();
+        SpawnUI();
         LoadLevelImages();
     }
 
@@ -99,13 +102,16 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
         _selectionData.AddToLevelList(newData);
     }
 
+    private void SpawnUI()
+    {
+        GameObject uiObj = Instantiate(_uiToSpawn);
+        _levelSelectionUI = uiObj.GetComponent<LevelSelectionWindow>();
+    }
+
     public void LoadLevelImages()
     {
-        GameObject selectionUI = Instantiate(_uiToSpawn);
-        LevelSelectionWindow ui = selectionUI.GetComponent<LevelSelectionWindow>();
-
-        ui.Levels = GetPageLevels();
-        ui.ShowWindow();
+        _levelSelectionUI.Levels = GetPageLevels();
+        _levelSelectionUI.ShowWindow();
     }
 
     public List<LevelData> GetPageLevels()
