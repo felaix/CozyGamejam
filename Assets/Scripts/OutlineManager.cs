@@ -78,6 +78,7 @@ public class OutlineManager : MonoBehaviour
         if (notReachedPoints > points.Count / 2) { notReachedPoints = notReachedPoints * 3; }
 
         int penalty = Mathf.Abs(notReachedPoints + penaltyForTooManyFootsteps);
+        if (penalty > 30) penalty = 30;
 
         float maxScore = 100f;
         float maxAccuracy = 2f;
