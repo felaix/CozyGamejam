@@ -1,6 +1,8 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class EventSystemHandler : Singleton<EventSystemHandler>
 {
@@ -15,6 +17,13 @@ public class EventSystemHandler : Singleton<EventSystemHandler>
     private void Start()
     {
         _eventSystem = EventSystem.current;
+        SetFirstSelectedButton();
+    }
+
+    private void SetFirstSelectedButton()
+    {
+        Selectable[] selectables = FindObjectsOfType<Selectable>();
+        if (selectables[0].IsInteractable()) { _eventSystem.SetSelectedGameObject(selectables[0].gameObject); }
     }
 
     private void Update()
