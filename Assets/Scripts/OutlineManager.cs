@@ -13,6 +13,7 @@ public class OutlineManager : MonoBehaviour
     [SerializeField] private List<ScriptableImage> outlines;
 
     [SerializeField] private List<Vector2> footpoints;
+    public List<Vector2> TotalPoints => _totalPoints;
     [SerializeField] private List<Vector2> _totalPoints;
 
     [SerializeField] private GameObject scoreUI;
@@ -33,12 +34,18 @@ public class OutlineManager : MonoBehaviour
         SoundManager.Instance.PlayMusic("StandardMusic");
     }
 
+    private float _visitedPoints = 0;
+
     public void CheckDistance(Collider2D col, Vector2 playerPos)
     {
         float dis = GetPlayerPointDistance(col, playerPos);
 
         //  first time triggering point
-        if (IsFirstVisit(col)) AddPointAsEntry(col, dis);
+        if (IsFirstVisit(col))
+        {
+            Debug.Log($"visited points: {_visitedPoints}");
+            AddPointAsEntry(col, dis);
+        }
         else
         {
             float lastDis = GetLastDistance(col);

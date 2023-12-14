@@ -46,6 +46,7 @@ public class Outline : MonoBehaviour
         {
             SpawnVectorPoint(spriteVertices[i]);
         }
+        Debug.Log($"total Points: {_outlineManager.TotalPoints}");
     }
 
     private void SpawnVectorPoint(Vector2 point)
