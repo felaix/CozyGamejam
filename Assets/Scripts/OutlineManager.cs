@@ -123,7 +123,7 @@ public class OutlineManager : MonoBehaviour
     public void ShowScore()
     {
         scoreUI.gameObject.SetActive(true);
-        scoreTMP.text = $"Score: {(int)GetScore()} / 100";
+        scoreTMP.text = $"{(int)GetScore()} / 100";
     }
 
     public void AddFootStep(Vector2 point) { _steps.Add(point); }
