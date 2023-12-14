@@ -10,10 +10,6 @@ using UnityEngine.UI;
 public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
 {
     [SerializeField]
-    private Button _debugBtn;
-    [SerializeField]
-    private Button _scoreBtn;
-    [SerializeField]
     private Button _nextPageBtn;
     [SerializeField]
     private Button _lastPageBtn;
@@ -115,19 +111,5 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
     {
         _selections.UpdatePage(showNext);
         _selections.LoadLevelImages();
-    }
-
-    private void DebugButton()
-    {
-        _debugBtn.onClick.RemoveAllListeners();
-        _debugBtn.onClick.AddListener(() =>
-        {
-            _selections.PrepareNewLevels();
-        });
-        _scoreBtn.onClick.RemoveAllListeners();
-        _scoreBtn.onClick.AddListener(() =>
-        {
-            LevelSelectionData.Instance.TotalScore += 200;
-        });
     }
 }
