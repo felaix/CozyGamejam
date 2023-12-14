@@ -48,7 +48,7 @@ public class LevelSelectionData : Singleton<LevelSelectionData>
 
     private void ResetLevel(LevelData data)
     {
-        Debug.Log("RESET LEVEL");
+        //Debug.Log("RESET LEVEL");
         data.Score = 0;
         GameManager.Instance.LoadLevel(data);
     }

@@ -14,7 +14,7 @@ public class SoundUI : MonoBehaviour, IPointerUpHandler, IPointerExitHandler, IS
     private void OnEnable()
     {
         if (masterObj == null) return;
-        EventSystemHandler.Instance.SetFirstButton(masterObj);
+        EventSystemHandler.Instance.SetSelected(masterObj);
     }
 
     private void OnDisable()

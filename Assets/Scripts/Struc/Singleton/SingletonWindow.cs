@@ -42,6 +42,6 @@ public class SingletonWindow<T> : Singleton<T> where T: MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        EventSystemHandler.Instance.SetFirstButton(_firstSelected);
+        EventSystemHandler.Instance.SetSelected(_firstSelected);
     }
 }

@@ -76,6 +76,8 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
         {
             GameManager.Instance.QuitGame();
         });
+
+        //EventSystemHandler.Instance.SetSelected(_nextPageBtn.gameObject);
     }
 
     private bool CanShowLastPage => !_selections.IsFirstPage && _selections.HasLessPages;

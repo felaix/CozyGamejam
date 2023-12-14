@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EventSystemHandler : Singleton<EventSystemHandler>
@@ -13,7 +16,15 @@ public class EventSystemHandler : Singleton<EventSystemHandler>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
+
+        //SceneManager.activeSceneChanged += LoadNavigation;
     }
+
+    private void LoadNavigation(Scene oldScene, Scene newScene)
+    {
+        Invoke(nameof(SetFirstSelectedButton), .01f);
+    }
+
     private void Start()
     {
         _eventSystem = EventSystem.current;
@@ -23,7 +34,10 @@ public class EventSystemHandler : Singleton<EventSystemHandler>
     public void SetFirstSelectedButton()
     {
         Selectable[] selectables = FindObjectsOfType<Selectable>();
-        if (selectables[0].IsInteractable()) { _eventSystem.SetSelectedGameObject(selectables[0].gameObject); }
+        if (selectables[0].IsInteractable()) { SetSelected(selectables[0].gameObject); }
+        else { Debug.Log("is not interactable btn"); }
+
+        Debug.Log("set first selected to: " + selectables[0]);
     }
 
     private void Update()
@@ -32,5 +46,5 @@ public class EventSystemHandler : Singleton<EventSystemHandler>
         else _lastObj = _eventSystem.currentSelectedGameObject;
     }
 
-    public void SetFirstButton(GameObject button) => _eventSystem.SetSelectedGameObject(button);
+    public void SetSelected(GameObject selection) => _eventSystem.SetSelectedGameObject(selection);
 }

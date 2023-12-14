@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     public GameObject ImageObj;
 
@@ -51,6 +51,7 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _bgUnhovered.color = VisibleColor(_bgUnhovered);
         SetOutlineImage(curData);
         SetButtons(curData);
+        EventSystemHandler.Instance.SetSelected(gameObject);
     }
 
 
@@ -61,6 +62,7 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             GameManager.Instance.LoadLevel(data);
         });
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -73,6 +75,20 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         if (_scaleAnimation != null) ClearAnimations();
         AnimateButton(UnhoveredScale, false);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        if (_scaleAnimation != null) ClearAnimations();
+        AnimateButton(UnhoveredScale, false);
+        Debug.Log("deselect item");
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (_scaleAnimation != null) ClearAnimations();
+        AnimateButton(HoveredScale, true);
+        Debug.Log("select item");
     }
 
     private void AnimateButton(Vector3 targetScale, bool hovered)
