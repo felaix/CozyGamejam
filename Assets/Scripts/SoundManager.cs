@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,10 @@ public class SoundManager : MonoBehaviour
 
     public Sound[] musicSounds, sfxSounds, atmosphereSounds;
     public AudioSource musicSource, sfxSource, atmosphereSource;
+    public float fadeDuration = 1f;
 
     private int lastIndex;
+   
 
     private void Awake()
     {
@@ -36,8 +39,10 @@ public class SoundManager : MonoBehaviour
             randomIndex = GetRandomIndex(s.clips.Length);
         }
 
-        musicSource.clip = s.clips[randomIndex];
-        musicSource.Play(); 
+        //musicSource.clip = s.clips[randomIndex];
+
+        StartCoroutine(FadeMusic(s.clips[randomIndex]));
+        //musicSource.Play(); 
         StoreIndex(randomIndex);
     }
 
@@ -84,6 +89,35 @@ public class SoundManager : MonoBehaviour
     private void StoreIndex(int index) { lastIndex = index; }
 
     private bool GetIsLastIndex(int index) { if (index == lastIndex) return true; else return false; }
+
+    private IEnumerator FadeMusic(AudioClip clip)
+    {
+        float timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            musicSource.volume = Mathf.Lerp(1f,0f, timer / fadeDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        musicSource.Stop();
+
+        musicSource.clip = clip;
+
+        musicSource.Play();
+
+        timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            musicSource.volume = Mathf.Lerp(0.0f, 1.0f, timer / fadeDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
+    }
 }
 
 [System.Serializable]

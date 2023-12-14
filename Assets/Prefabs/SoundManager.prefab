@@ -437,6 +437,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: fb05f7bcf4465f04cac1ca464d76e7bf, type: 3}
     - {fileID: 8300000, guid: 13d3632d30ae1be44a87b0a688180c1b, type: 3}
     - {fileID: 8300000, guid: d788de11f5c62094ca9c092ff8e63b67, type: 3}
+    - {fileID: 8300000, guid: 15e48d247d6753b4e9d83a9777979bcf, type: 3}
+    - {fileID: 8300000, guid: b9e797029d2f1d3478bd3452bad3fedc, type: 3}
+    - {fileID: 8300000, guid: 43665cbd00848ab46b1b17cc454d0698, type: 3}
   sfxSounds:
   - name: Footsteps
     clips:
@@ -462,6 +465,36 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 17c228ebad93e5346a981f719d13e1f7, type: 3}
     - {fileID: 8300000, guid: 2b40ef143c001694286abf8c8317b3e1, type: 3}
     - {fileID: 8300000, guid: ef16e7006cf58eb4bb062a4c571d2612, type: 3}
+  - name: Footsteps_Accurate
+    clips:
+    - {fileID: 8300000, guid: 32826ec5a676fb24cb0f61e240f8f162, type: 3}
+    - {fileID: 8300000, guid: 2cb4f4ba0ba7373408d5cffbf40fb9c4, type: 3}
+    - {fileID: 8300000, guid: 2d459f19341ec7c4c9a0e6d80e40c633, type: 3}
+    - {fileID: 8300000, guid: 14694e08381bb5841a3b7b4d276c1827, type: 3}
+    - {fileID: 8300000, guid: 946d4323bd4981046b02c09f9d23d5dd, type: 3}
+    - {fileID: 8300000, guid: d513171adfb314d44a2e4c9e2df89d7b, type: 3}
+  - name: Click_Snow
+    clips:
+    - {fileID: 8300000, guid: 3ff9ff6fbef7a194f9b3435e2ec14ff9, type: 3}
+  - name: Hover_Snow
+    clips:
+    - {fileID: 8300000, guid: 00896a3488d3b3a41b341e41f813ac43, type: 3}
+  - name: Click_Wood
+    clips:
+    - {fileID: 8300000, guid: 940c54181daf7a840884469f4084615c, type: 3}
+  - name: Hover_Wood
+    clips:
+    - {fileID: 8300000, guid: 6057d205901ff0c43b7bf2155213db4f, type: 3}
+  - name: Completed
+    clips:
+    - {fileID: 8300000, guid: 2235403965b80294a95df4097fe2793d, type: 3}
+  - name: Slide
+    clips:
+    - {fileID: 8300000, guid: d9791703e0659e5429b624945e066745, type: 3}
+    - {fileID: 8300000, guid: 0c730dacddc2b994a80eec38b6421126, type: 3}
+  - name: Unlocked
+    clips:
+    - {fileID: 8300000, guid: c4ea7c9a5645a5442bf44b4048689781, type: 3}
   atmosphereSounds:
   - name: atmo
     clips:
@@ -469,3 +502,4 @@ MonoBehaviour:
   musicSource: {fileID: 1050803408927808870}
   sfxSource: {fileID: 2210118968790741058}
   atmosphereSource: {fileID: 7728015981681894802}
+  fadeDuration: 1

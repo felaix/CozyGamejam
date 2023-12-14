@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Authentication.ExtendedProtection;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,22 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
                 obj.GetComponent<LevelSelectItem>().PrepareLevelDisplay(data);
                 _levelDisplays.Add(data, obj);
             }
+        }
+
+        //SetNavigation();
+    }
+
+    private void SetNavigation()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Navigation navi = _levelsObj.transform.GetChild(i).GetChild(0).GetComponent<Button>().navigation;
+            navi.mode = Navigation.Mode.Explicit;
+
+            if (i == 3) { navi.selectOnRight = _levelsObj.transform.GetChild(0).GetChild(0).GetComponent<Button>(); return; }
+
+            navi.selectOnRight = _levelsObj.transform.GetChild(i + 1).GetChild(0).GetComponent<Button>();
+            if (i != 0) navi.selectOnLeft = _levelsObj.transform.GetChild(i -1).GetChild(0).GetComponent <Button>();
         }
     }
 

@@ -11,6 +11,9 @@ public class TutorialWindow : SingletonWindow<TutorialWindow>
     [SerializeField]
     private Button _resetBtn;
 
+    [SerializeField]
+    private Button _confirmBtn;
+
     private LevelSelectionData _levelData;
 
     private void Start()
@@ -22,6 +25,7 @@ public class TutorialWindow : SingletonWindow<TutorialWindow>
         {
             _tutorial.SetActive(true);
             LevelSelectionData.Instance.HasSeenTutorial = true;
+            EventSystemHandler.Instance.SetSelected(_confirmBtn.gameObject);
         }
 
         _resetBtn.onClick.RemoveAllListeners();
