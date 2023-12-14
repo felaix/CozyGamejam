@@ -81,14 +81,14 @@ public class LevelSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         if (_scaleAnimation != null) ClearAnimations();
         AnimateButton(UnhoveredScale, false);
-        Debug.Log("deselect item");
+        //  Debug.Log("deselect item");
     }
 
     public void OnSelect(BaseEventData eventData)
     {
         if (_scaleAnimation != null) ClearAnimations();
         AnimateButton(HoveredScale, true);
-        Debug.Log("select item");
+        //  Debug.Log("select item");
     }
 
     private void AnimateButton(Vector3 targetScale, bool hovered)

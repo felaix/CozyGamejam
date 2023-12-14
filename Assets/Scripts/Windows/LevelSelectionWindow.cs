@@ -39,25 +39,36 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
     {
         _selections = LevelSelectionController.Instance;
         SetButtons();
-        CreateLevelDisplays();
+        HandleLevelDisplays();
         //  DebugButton();
         base.ShowWindow();
     }
 
+    private void HandleLevelDisplays()
+    {
+        DestroyLevelDisplays();
+        CreateLevelDisplays();
+    }
+
     private void CreateLevelDisplays()
     {
-        if (_levelDisplays.Count > 0) _levelDisplays.Clear();
-        else
+        foreach (LevelData data in Levels)
         {
-            foreach (LevelData data in Levels)
-            {
-                GameObject obj = Instantiate(_buttonPrefab, _levelsObj.transform);
-                obj.GetComponent<LevelSelectItem>().PrepareLevelDisplay(data);
-                _levelDisplays.Add(data, obj);
-            }
+            GameObject obj = Instantiate(_buttonPrefab, _levelsObj.transform);
+            obj.GetComponent<LevelSelectItem>().PrepareLevelDisplay(data);
+            _levelDisplays.Add(data, obj);
+        }
+        //SetNavigation();
+    }
+
+    private void DestroyLevelDisplays()
+    {
+        foreach (KeyValuePair<LevelData, GameObject> pair in _levelDisplays)
+        {
+            Destroy(pair.Value);
         }
 
-        //SetNavigation();
+        _levelDisplays.Clear();
     }
 
     private void SetNavigation()

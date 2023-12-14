@@ -120,6 +120,7 @@ public class LevelSelectionController : Singleton<LevelSelectionController>
         int first = 0;
         int last = 0;
 
+        Debug.Log($"ActivePage = {ActivePage}");
         if (ActivePage == 1) { first = 0; last = 2; }
         else if (ActivePage == 2) { first = 3; last = 5; }
         else if (ActivePage == 3) { first = 6; last = 8; }
