@@ -20,7 +20,7 @@ public class EventSystemHandler : Singleton<EventSystemHandler>
         SetFirstSelectedButton();
     }
 
-    private void SetFirstSelectedButton()
+    public void SetFirstSelectedButton()
     {
         Selectable[] selectables = FindObjectsOfType<Selectable>();
         if (selectables[0].IsInteractable()) { _eventSystem.SetSelectedGameObject(selectables[0].gameObject); }
