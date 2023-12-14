@@ -11,6 +11,8 @@ public class CollisionCheck : MonoBehaviour
     public bool IsLastCollider(Collider2D col) => col == _lastCollider;
     public bool IsFirstCollider() => _lastCollider == null;
 
+    public OutlineManager OutlineManager => OutlineManager.Instance;
+
     public void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Point"))
@@ -26,7 +28,7 @@ public class CollisionCheck : MonoBehaviour
     {
         if (col == _curCollider)
         {
-            OutlineManager.Instance.CheckDistance(col, transform.position);
+            OutlineManager.CheckDistance(col, transform.position);
         }
     }
 
