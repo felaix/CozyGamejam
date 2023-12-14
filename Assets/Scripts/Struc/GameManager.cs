@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
         _callbacks.OnExitLevel += ExitLevel;
     }
 
-    private void ExitLevel(List<Vector2> totalPoints, float score)
+    private void ExitLevel(List<Transform> totalPoints, float score)
     {
         LoadScene(1);
     }

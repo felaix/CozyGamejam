@@ -65,7 +65,7 @@ public class LevelController : Singleton<LevelController>
 
     //  called, when: player presses button to leave
     //                OR all points are reached
-    public void FinishLevel(List<Vector2> totalPoints, float score)
+    public void FinishLevel(List<Transform> totalPoints, float score)
     {
         _callbacks.OnExitLevel?.Invoke(totalPoints, score);
     }

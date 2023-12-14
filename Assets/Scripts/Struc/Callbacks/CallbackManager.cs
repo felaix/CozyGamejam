@@ -11,7 +11,7 @@ public class CallbackManager : Singleton<CallbackManager>
     //  for every script, that is required for preparing/starting level
     public Action<LevelData> OnLoadLevel;
     public Action<LevelData> OnLevelReset;
-    public Action<List<Vector2>, float> OnExitLevel;
+    public Action<List<Transform>, float> OnExitLevel;
 
     public Action<List<LevelData>> OnShowLevelSelection;
 

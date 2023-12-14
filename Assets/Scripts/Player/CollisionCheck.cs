@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class CollisionCheck : MonoBehaviour
 {
-    private Collider2D _curCollider;
-    private Collider2D _lastCollider;
+    public List<Collider2D> CollidingObjects { get; private set; } = new();
 
-    public bool IsCurrentCollider(Collider2D col) => col == _curCollider;
-    public bool IsLastCollider(Collider2D col) => col == _lastCollider;
-    public bool IsFirstCollider() => _lastCollider == null;
+    public bool IsCurrentCollider(Collider2D col) => CollidingObjects.Contains(col);
 
     public OutlineManager OutlineManager => OutlineManager.Instance;
 
@@ -17,16 +14,16 @@ public class CollisionCheck : MonoBehaviour
     {
         if (col.CompareTag("Point"))
         {
-            if (IsFirstCollider() || !IsLastCollider(col))
+            if (!IsCurrentCollider(col))
             {
-                _curCollider = col;
+                CollidingObjects.Add(col);
             }
         }
     }
 
     public void OnTriggerStay2D(Collider2D col)
     {
-        if (col == _curCollider)
+        if (IsCurrentCollider(col))
         {
             OutlineManager.CheckDistance(col, transform.position);
         }
@@ -36,7 +33,9 @@ public class CollisionCheck : MonoBehaviour
     {
         if (IsCurrentCollider(col))
         {
-            _lastCollider = _curCollider;
+            CollidingObjects.Remove(col);
         }
     }
+
+    //  wenn step außerhalb eines triggers liegt => penalty
 }

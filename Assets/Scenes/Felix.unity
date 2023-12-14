@@ -1391,9 +1391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30aee142d84ac22438626ddab8ff309e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 5501650477544348061}
   sampleRate: 5
   outlines: []
-  footpoints: []
+  _steps: []
+  _noPenaltySteps: []
   _totalPoints: []
   scoreUI: {fileID: 1438009574}
   scoreTMP: {fileID: 542911557}
@@ -4428,6 +4430,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2134589940790754132, guid: 4b5480ba92fef6244b0159083fc8f910, type: 3}
   m_PrefabInstance: {fileID: 5501650477544348059}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5501650477544348061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3130297774291987839, guid: 4b5480ba92fef6244b0159083fc8f910, type: 3}
+  m_PrefabInstance: {fileID: 5501650477544348059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f04b74e56a194640bfe54226e33a36d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

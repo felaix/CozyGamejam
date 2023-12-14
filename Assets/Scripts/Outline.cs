@@ -54,7 +54,7 @@ public class Outline : MonoBehaviour
 
         Vector3 pixelPosition = _codeRenderer.transform.TransformPoint(point);
 
-        Instantiate(_pointToSpawn, pixelPosition, Quaternion.identity, _outlineParent);
-        _outlineManager.AddPoint(pixelPosition);
+        GameObject pointObj = Instantiate(_pointToSpawn, pixelPosition, Quaternion.identity, _outlineParent);
+        _outlineManager.AddPoint(pointObj.transform);
     }
 }

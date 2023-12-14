@@ -6,15 +6,20 @@ using UnityEngine;
 
 public class OutlineManager : MonoBehaviour
 {
+    [SerializeField]
+    private CollisionCheck _player;
     public static OutlineManager Instance { get; private set; }
 
     [SerializeField] private int sampleRate;
 
     [SerializeField] private List<ScriptableImage> outlines;
 
-    [SerializeField] private List<Vector2> footpoints;
-    public List<Vector2> TotalPoints => _totalPoints;
-    [SerializeField] private List<Vector2> _totalPoints;
+    [SerializeField] private List<Vector2> _steps = new();
+    [SerializeField] private List<Vector3> _noPenaltySteps = new();
+
+    public List<Transform> TotalPoints => _totalPoints;
+    [SerializeField] private List<Transform> _totalPoints;
+    private List<Transform> _reachedPoints = new();
 
     [SerializeField] private GameObject scoreUI;
     [SerializeField] private TMP_Text scoreTMP;
@@ -22,8 +27,9 @@ public class OutlineManager : MonoBehaviour
     private Dictionary<Collider2D, float> _pointDistances = new();
 
     [SerializeField]
-    private float _minRange = 0.025f;
-    
+    private float _minRange;
+    private float _notReachedDistance = 1f;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -39,10 +45,7 @@ public class OutlineManager : MonoBehaviour
         float dis = GetPlayerPointDistance(col, playerPos);
 
         //  first time triggering point
-        if (IsFirstVisit(col))
-        {
-            AddPointAsEntry(col, dis);
-        }
+        if (IsFirstVisit(col)) AddPointAsEntry(col, dis);
         else
         {
             float lastDis = GetLastDistance(col);
@@ -70,32 +73,42 @@ public class OutlineManager : MonoBehaviour
 
     public float GetScore()
     {
-        //  differenz zwischen _pointDistances.count und points.count
-        //  => negativ berücksichtigen, dafür sollte ne schlechte akkuratheit genutzt werden
-        //  int notReachedPoints * ;
+        int penalty = _steps.Count - _noPenaltySteps.Count;
 
-        int missingPoints = NotReachedPoints;
-        int missingPointsPenalty = (_totalPoints.Count - footpoints.Count) * 2;
+        if (ReachedMinHalfOfAllPoints(MissedPoints)) penalty *= 3;
 
-        if (missingPoints > _totalPoints.Count / 2)
-        {
-            missingPoints = missingPoints * 3;
-        }
-
-        int penalty = Mathf.Abs(missingPoints + missingPointsPenalty);
         if (penalty > 30) penalty = 30;
 
         float maxScore = 100f;
-        float maxAccuracy = 2f;
+        float maxAccuracy = 1f;
+
+        AddMissedPointsDistances();
 
         float score = Mathf.Clamp01(1f - TotalAccuracy / maxAccuracy) * maxScore - penalty;
-        Debug.Log($"maxscore: {maxScore}, totalAccuracy: {TotalAccuracy}, not reached points: {missingPoints}, penalty for footsteps: {missingPointsPenalty}, total penalty: {penalty}");
-        Debug.Log("Score: " + score);
 
         if (score < 0f) score = 0f;
         if (score > 100f) score = 100f;
 
         return score;
+    }
+
+    private void AddMissedPointsDistances()
+    {
+        //  for jeden missedPoint, adde distance von 0,5 zu _distances
+        //  brauch dafür aber auch alle nicht erreichten punkte
+
+        //  check all totalPoints
+        for (int i = 0; i < _totalPoints.Count; i++)
+        {
+            Collider2D curCol = _totalPoints[i].gameObject.GetComponent<Collider2D>();
+
+            //  point has not been visited
+            if (!_pointDistances.ContainsKey(curCol))
+            {
+                //  add point with distance for not reached points
+                _pointDistances.Add(curCol, _notReachedDistance);
+            }
+        }
     }
 
     public void ShowScore()
@@ -104,18 +117,24 @@ public class OutlineManager : MonoBehaviour
         scoreTMP.text = $"Score: {(int)GetScore()} / 100";
     }
 
-    public void AddFootStep(Vector2 point)
+    public void AddFootStep(Vector2 point) { _steps.Add(point); }
+    public void AddOutsideOutlineStep(Vector2 point)
     {
-        footpoints.Add(point);
+        if (!_noPenaltySteps.Contains(point)) _noPenaltySteps.Add(point);
+    }
+    public void ResetPoints() => _totalPoints.Clear();
+    public void ResetFootSteps() => _steps.Clear();
+    public void AddPoint(Transform point) => _totalPoints.Add(point);
+
+    private void AddPointAsEntry(Collider2D point, float distance)
+    {
+        _pointDistances.Add(point, distance);
+        _reachedPoints.Add(point.transform);
     }
 
-    public void ResetPoints() => _totalPoints.Clear();
-    public void ResetFootSteps() => footpoints.Clear();
-    public void AddPoint(Vector2 point) => _totalPoints.Add(point);
-
-    private void AddPointAsEntry(Collider2D col, float distance) => _pointDistances.Add(col, distance);
-
-
+    public bool IsCollidingWithPlayer(Collider2D collider) => _player.IsCurrentCollider(collider);
+    public bool ReachedMinHalfOfAllPoints(int missedPoints) => missedPoints > (_totalPoints.Count / 2);
+    public bool IsPointRegistered(Vector2 point) => _steps.Contains(point);
     public bool AllPointsReached => _pointDistances.Count >= _totalPoints.Count;
     public bool IsFirstVisit(Collider2D col) => !_pointDistances.ContainsKey(col);
     public bool IsInMinRange(float dis) => dis < _minRange;
@@ -128,7 +147,7 @@ public class OutlineManager : MonoBehaviour
     private float GetLastDistance(Collider2D col) => _pointDistances.GetValueOrDefault(col);
     private float GetShortestDistance(float lastDis, float newDis) => Mathf.Min(lastDis, newDis);
 
-    public int NotReachedPoints => (_totalPoints.Count - _pointDistances.Count) * 2;
+    public int MissedPoints => (_totalPoints.Count - _pointDistances.Count) * 2;
 
     //  used by returnButton
     public void ReturnToLevelSelection()
