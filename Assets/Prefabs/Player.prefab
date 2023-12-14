@@ -106,7 +106,7 @@ MonoBehaviour:
   footprintsPrefab: {fileID: 3939398499326205973, guid: 7e4d9d7ada076664eb317fb96ae8e578, type: 3}
   spd: 1
   footprintSpawnInterval: 0.3
-  footStepSpawnPoint: {fileID: 6415607715318765186}
+  _stepSpawn: {fileID: 6415607715318765186}
 --- !u!61 &7763021224948699602
 BoxCollider2D:
   m_ObjectHideFlags: 0

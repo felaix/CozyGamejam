@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float spd = 5f;
     [SerializeField] private float footprintSpawnInterval = .3f;
-    [SerializeField] private Transform footStepSpawnPoint;
+    [SerializeField] private Transform _stepSpawn;
 
     private DefaultInputActions input;
     private Vector2 movementInput;
@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
         if (!isMoving) return;
 
         float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
-        Instantiate(footprintsPrefab, transform.position, Quaternion.Euler(0f, 0f, angle-90f));
+        Instantiate(footprintsPrefab, _stepSpawn.position, Quaternion.Euler(0f, 0f, angle-90f));
     }
 
     private void Update()

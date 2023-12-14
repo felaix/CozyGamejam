@@ -34,8 +34,6 @@ public class OutlineManager : MonoBehaviour
         SoundManager.Instance.PlayMusic("StandardMusic");
     }
 
-    private float _visitedPoints = 0;
-
     public void CheckDistance(Collider2D col, Vector2 playerPos)
     {
         float dis = GetPlayerPointDistance(col, playerPos);
@@ -43,7 +41,6 @@ public class OutlineManager : MonoBehaviour
         //  first time triggering point
         if (IsFirstVisit(col))
         {
-            Debug.Log($"visited points: {_visitedPoints}");
             AddPointAsEntry(col, dis);
         }
         else
