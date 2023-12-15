@@ -21,6 +21,8 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
     [SerializeField]
     private GameObject _levelsObj;
 
+    [SerializeField] private GameObject unlockedNewLvl;
+
     private Dictionary<LevelData, GameObject> _levelDisplays = new();
     public List<LevelData> Levels;
 
@@ -38,6 +40,8 @@ public class LevelSelectionWindow : SingletonWindow<LevelSelectionWindow>
         HandleLevelDisplays();
         //  DebugButton();
         base.ShowWindow();
+
+        if (CanShowNextPage) { unlockedNewLvl.SetActive(true); }
     }
 
     private void HandleLevelDisplays()

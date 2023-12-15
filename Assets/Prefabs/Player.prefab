@@ -107,6 +107,8 @@ MonoBehaviour:
   spd: 1
   footprintSpawnInterval: 0.3
   _stepSpawn: {fileID: 6415607715318765186}
+  restartBtn: {fileID: 0}
+  skipBtn: {fileID: 0}
 --- !u!61 &7763021224948699602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -244,8 +246,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.051747262, y: -0.10077107}
-  m_Size: {x: 0.336017, y: 0.49942946}
+  m_Offset: {x: -0.05798392, y: -0.17838274}
+  m_Size: {x: 0.25701943, y: 0.34420612}
   m_Direction: 0
 --- !u!1 &5363085692313475277
 GameObject:

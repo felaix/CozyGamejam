@@ -351,6 +351,21 @@ MonoBehaviour:
   bg: {fileID: 1814170844}
   newImg: {fileID: 1931923537}
   masterObj: {fileID: 1108195188}
+--- !u!114 &1108195192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108195188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Snow
+  clicked: Click_Snow
+  selected: Hover_Snow
 --- !u!1 &1329966134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3661112696028290588, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
@@ -686,6 +701,21 @@ MonoBehaviour:
   bg: {fileID: 1046395155}
   newImg: {fileID: 1951742418}
   masterObj: {fileID: 1108195188}
+--- !u!114 &1773417430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773417426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Snow
+  clicked: Click_Snow
+  selected: Hover_Snow
 --- !u!1 &1814170844 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 512453940302397784, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
@@ -727,6 +757,21 @@ MonoBehaviour:
   bg: {fileID: 1329966134}
   newImg: {fileID: 959965037}
   masterObj: {fileID: 1108195188}
+--- !u!114 &2072609818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072609814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0906cc0baa628c348814d5aeedac4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: Hover_Snow
+  clicked: Click_Snow
+  selected: Hover_Snow
 --- !u!1 &2105739397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7163738247989459968, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
@@ -1435,12 +1480,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5620789560228545983, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1108195190}
+    - targetCorrespondingSourceObject: {fileID: 5620789560228545983, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1108195192}
     - targetCorrespondingSourceObject: {fileID: 2501431372760055306, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1773417429}
+    - targetCorrespondingSourceObject: {fileID: 2501431372760055306, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1773417430}
     - targetCorrespondingSourceObject: {fileID: 8922606053014412027, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2072609817}
+    - targetCorrespondingSourceObject: {fileID: 8922606053014412027, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2072609818}
   m_SourcePrefab: {fileID: 100100000, guid: 8e515dbf5ad07584ea8726111b5abf9f, type: 3}
 --- !u!4 &6075007447724467054
 Transform:

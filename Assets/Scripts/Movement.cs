@@ -27,6 +27,8 @@ public class Movement : MonoBehaviour
     private bool isMoving = false;
     private bool colActivated = false;
 
+    private int counter = 0;
+
     Collider2D playerCol;
 
     private void Start()
@@ -129,8 +131,11 @@ public class Movement : MonoBehaviour
             InstantiateFootprint();
             SoundManager.Instance.PlaySFX("Footsteps");
             timer = 0;
+            counter++;
 
-            if (!colActivated) { ActivateCollision();  colActivated = true; }
+            if (counter != 10) return;
+
+            if (!colActivated) { ActivateCollision(); colActivated = true; }
         }
 
         Move();
