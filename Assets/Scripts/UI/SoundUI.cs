@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 public class SoundUI : MonoBehaviour, IPointerUpHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
 
-    [SerializeField] private GameObject fg;
+    [SerializeField] private GameObject schein;
+    [SerializeField] private GameObject bg;
+    [SerializeField] private GameObject newImg;
     [SerializeField] private GameObject masterObj;
 
     private bool toggled = true;
@@ -24,28 +26,46 @@ public class SoundUI : MonoBehaviour, IPointerUpHandler, IPointerExitHandler, IS
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        ToggleFG();
+        //ToggleFG();
     }
 
 
     public void ToggleFG()
     {
         toggled = !toggled;
-        fg.SetActive(toggled);
+        //fg.SetActive(toggled);
+    }
+
+    public void Toggle()
+    {
+        toggled = !toggled;
+
+        if (toggled)
+        {
+            schein.SetActive(true);
+            bg.SetActive(true);
+            newImg.SetActive(false);
+        }else
+        {
+            schein.SetActive(false);
+            bg.SetActive(false);
+            newImg.SetActive(true);
+        }
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ToggleFG();
+        //ToggleFG();
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        ToggleFG();
+        Toggle();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        ToggleFG();
+        Toggle();
     }
 }
